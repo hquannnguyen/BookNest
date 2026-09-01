@@ -1,8 +1,7 @@
-package com.example.quanlysachcanhan.ui.main
+﻿package com.example.quanlysachcanhan.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.quanlysachcanhan.adapter.BookAdapter
@@ -69,10 +68,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, StatisticsActivity::class.java))
         }
 
-        // TODO QuanNH — BOOK + SEARCH/FILTER/SORT:
-        // btnFilter -> dialog/category + status
-        // btnSort -> dialog chọn Constants.Sort.*
-        // sau khi chọn thì gọi loadBooks()
+        // TODO QuanNH - BOOK + SEARCH/FILTER/SORT:
+        // btnFilter -> dialog chon category + status
+        // btnSort -> dialog chon Constants.Sort.*
+        // sau khi chon thi goi loadBooks()
     }
 
     private fun loadBooks() {

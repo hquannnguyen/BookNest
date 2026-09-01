@@ -1,10 +1,12 @@
-package com.example.quanlysachcanhan.adapter
+﻿package com.example.quanlysachcanhan.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quanlysachcanhan.databinding.ItemBookBinding
 import com.example.quanlysachcanhan.model.Book
+import com.example.quanlysachcanhan.utils.getCategoryLabel
+import com.example.quanlysachcanhan.utils.getReadingStatusLabel
 import java.io.File
 
 class BookAdapter(
@@ -19,22 +21,14 @@ class BookAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): BookViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         val binding = ItemBookBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+            LayoutInflater.from(parent.context), parent, false
         )
         return BookViewHolder(binding)
     }
 
-    override fun onBindViewHolder(
-        holder: BookViewHolder,
-        position: Int
-    ) {
+    override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         holder.bind(items[position])
     }
 
@@ -45,10 +39,14 @@ class BookAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(book: Book) = with(binding) {
-            tvTitle.text = book.title
+            val ctx = root.context
+
+            tvTitle.text  = book.title
             tvAuthor.text = book.author
-            tvStatus.text = book.readingStatus
             ratingBar.rating = book.rating
+
+            // Dùng mapper: DB code → label đã dịch theo ngôn ngữ hiện tại
+            tvStatus.text = ctx.getReadingStatusLabel(book.readingStatus)
 
             val coverPath = book.coverImagePath
             if (!coverPath.isNullOrBlank()) {
@@ -62,9 +60,7 @@ class BookAdapter(
                 imgCover.setImageResource(android.R.drawable.ic_menu_gallery)
             }
 
-            root.setOnClickListener {
-                onBookClick(book)
-            }
+            root.setOnClickListener { onBookClick(book) }
         }
     }
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,7 +10,7 @@
         android:id="@+id/edtSearch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Tìm theo tên sách hoặc tác giả"
+        android:hint="@string/hint_search"
         android:inputType="text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +20,7 @@
         android:id="@+id/btnFilter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Lọc"
+        android:text="@string/btn_filter"
         app:layout_constraintTop_toBottomOf="@id/edtSearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnSort"/>
@@ -29,7 +29,7 @@
         android:id="@+id/btnSort"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Sắp xếp"
+        android:text="@string/btn_sort"
         app:layout_constraintTop_toBottomOf="@id/edtSearch"
         app:layout_constraintStart_toEndOf="@id/btnFilter"
         app:layout_constraintEnd_toStartOf="@id/btnStatistics"/>
@@ -38,7 +38,7 @@
         android:id="@+id/btnStatistics"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Thống kê"
+        android:text="@string/btn_statistics"
         app:layout_constraintTop_toBottomOf="@id/edtSearch"
         app:layout_constraintStart_toEndOf="@id/btnSort"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -58,7 +58,7 @@
         android:id="@+id/tvEmpty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chưa có sách"
+        android:text="@string/label_empty_books"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="@id/recyclerBooks"
         app:layout_constraintBottom_toBottomOf="@id/recyclerBooks"
@@ -69,7 +69,7 @@
         android:id="@+id/fabAddBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="Thêm sách"
+        android:contentDescription="@string/fab_add_book"
         android:src="@android:drawable/ic_input_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
