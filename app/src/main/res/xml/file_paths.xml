@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Thư mục covers/ trong External Files (dùng cho ImageStorageHelper) -->
+    <external-files-path
+        name="book_covers"
+        path="covers/" />
+
+    <!-- Thư mục cache (dùng cho ảnh chụp camera tạm) -->
+    <cache-path
+        name="camera_temp"
+        path="camera/" />
+</paths>
