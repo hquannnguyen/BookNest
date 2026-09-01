@@ -1,4 +1,4 @@
-package com.example.quanlysachcanhan.ui.detail
+﻿package com.example.quanlysachcanhan.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,8 @@ import com.example.quanlysachcanhan.databinding.ActivityBookDetailBinding
 import com.example.quanlysachcanhan.ui.addedit.AddEditBookActivity
 import com.example.quanlysachcanhan.utils.Constants
 import com.example.quanlysachcanhan.utils.ShareUtils
+import com.example.quanlysachcanhan.utils.getCategoryLabel
+import com.example.quanlysachcanhan.utils.getReadingStatusLabel
 
 class BookDetailActivity : AppCompatActivity() {
 
@@ -27,14 +29,11 @@ class BookDetailActivity : AppCompatActivity() {
         binding = ActivityBookDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        bookRepository = BookRepository(this)
+        bookRepository  = BookRepository(this)
         quoteRepository = QuoteRepository(this)
 
         bookId = intent.getLongExtra(Constants.Extras.BOOK_ID, 0L)
-        if (bookId <= 0L) {
-            finish()
-            return
-        }
+        if (bookId <= 0L) { finish(); return }
 
         setupQuoteList()
         setupEvents()
@@ -51,7 +50,6 @@ class BookDetailActivity : AppCompatActivity() {
             quoteRepository.delete(quote.id)
             loadQuotes()
         }
-
         binding.recyclerQuotes.layoutManager = LinearLayoutManager(this)
         binding.recyclerQuotes.adapter = quoteAdapter
     }
@@ -65,22 +63,20 @@ class BookDetailActivity : AppCompatActivity() {
         }
 
         binding.btnDelete.setOnClickListener {
-            // TODO QuanNH — BOOK DETAIL:
-            // thêm AlertDialog xác nhận trước khi delete.
+            // TODO QuanNH - BOOK DETAIL:
+            // them AlertDialog xac nhan truoc khi delete
             bookRepository.delete(bookId)
             finish()
         }
 
         binding.btnShare.setOnClickListener {
-            bookRepository.getById(bookId)?.let {
-                ShareUtils.shareBook(this, it)
-            }
+            bookRepository.getById(bookId)?.let { ShareUtils.shareBook(this, it) }
         }
 
         binding.btnAddQuote.setOnClickListener {
-            // TODO KienTT — QUOTE:
-            // mở AlertDialog có EditText
-            // quoteRepository.insert(...)
+            // TODO KienTT - QUOTE:
+            // mo AlertDialog co EditText nhap noi dung
+            // quoteRepository.insert(Quote(bookId=bookId, content=content))
             // loadQuotes()
         }
     }
@@ -88,17 +84,17 @@ class BookDetailActivity : AppCompatActivity() {
     private fun loadBook() {
         val book = bookRepository.getById(bookId) ?: return
 
-        binding.tvTitle.text = book.title
+        binding.tvTitle.text  = book.title
         binding.tvAuthor.text = book.author
-        binding.tvCategory.text = book.category
-        binding.tvStatus.text = book.readingStatus
-        binding.tvNote.text = book.note
+        binding.tvNote.text   = book.note
         binding.ratingBar.rating = book.rating
+
+        // Dùng mapper để hiển thị đúng ngôn ngữ
+        binding.tvCategory.text = getCategoryLabel(book.category)
+        binding.tvStatus.text   = getReadingStatusLabel(book.readingStatus)
     }
 
     private fun loadQuotes() {
-        quoteAdapter.submitList(
-            quoteRepository.getByBookId(bookId)
-        )
+        quoteAdapter.submitList(quoteRepository.getByBookId(bookId))
     }
 }

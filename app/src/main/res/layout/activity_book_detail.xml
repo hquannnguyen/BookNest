@@ -56,31 +56,29 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Sửa"/>
+                android:text="@string/btn_edit"/>
 
             <Button
                 android:id="@+id/btnShare"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Chia sẻ"/>
+                android:text="@string/btn_share"/>
 
             <Button
                 android:id="@+id/btnDelete"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Xóa"/>
+                android:text="@string/btn_delete"/>
         </LinearLayout>
 
         <Button
             android:id="@+id/btnAddQuote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="+ Thêm trích dẫn"/>
+            android:text="@string/btn_add_quote"/>
 
-        <!-- FIX BUG #2: Đổi từ 300dp cố định sang wrap_content,
-             nestedScrollingEnabled=false để không conflict với ScrollView cha -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerQuotes"
             android:layout_width="match_parent"

@@ -1,3 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App -->
     <string name="app_name">Quản lý sách cá nhân</string>
+
+    <!-- MainActivity -->
+    <string name="hint_search">Tìm theo tên sách hoặc tác giả</string>
+    <string name="btn_filter">Lọc</string>
+    <string name="btn_sort">Sắp xếp</string>
+    <string name="btn_statistics">Thống kê</string>
+    <string name="label_empty_books">Chưa có sách nào. Nhấn + để thêm!</string>
+    <string name="fab_add_book">Thêm sách</string>
+
+    <!-- AddEditBookActivity -->
+    <string name="hint_title">Tên sách</string>
+    <string name="hint_author">Tác giả</string>
+    <string name="hint_note">Ghi chú cá nhân</string>
+    <string name="btn_choose_cover">Chọn ảnh bìa</string>
+    <string name="btn_save">Lưu sách</string>
+    <string name="title_add_book">Thêm sách mới</string>
+    <string name="title_edit_book">Chỉnh sửa sách</string>
+    <string name="error_title_empty">Vui lòng nhập tên sách</string>
+    <string name="error_author_empty">Vui lòng nhập tác giả</string>
+    <string name="msg_book_added">Đã thêm sách</string>
+    <string name="msg_book_updated">Đã cập nhật sách</string>
+
+    <!-- BookDetailActivity -->
+    <string name="btn_edit">Sửa</string>
+    <string name="btn_share">Chia sẻ</string>
+    <string name="btn_delete">Xóa</string>
+    <string name="btn_add_quote">+ Thêm trích dẫn</string>
+    <string name="content_description_cover">Ảnh bìa</string>
+    <string name="content_description_delete_quote">Xóa trích dẫn</string>
+    <string name="dialog_delete_title">Xác nhận xóa</string>
+    <string name="dialog_delete_message">Xóa sách này? Thao tác không thể hoàn tác.</string>
+    <string name="dialog_delete_confirm">Xóa</string>
+    <string name="dialog_delete_cancel">Hủy</string>
+    <string name="msg_book_deleted">Đã xóa sách</string>
+
+    <!-- Quote -->
+    <string name="dialog_add_quote_title">Thêm trích dẫn</string>
+    <string name="dialog_edit_quote_title">Sửa trích dẫn</string>
+    <string name="dialog_delete_quote_message">Xóa trích dẫn này?</string>
+    <string name="hint_quote_content">Nội dung trích dẫn...</string>
+    <string name="msg_quote_added">Đã thêm trích dẫn</string>
+    <string name="msg_quote_deleted">Đã xóa trích dẫn</string>
+
+    <!-- StatisticsActivity -->
+    <string name="title_statistics">Thống kê</string>
+    <string name="label_total_books">Tổng số sách</string>
+    <string name="label_unread">Chưa đọc</string>
+    <string name="label_reading">Đang đọc</string>
+    <string name="label_read">Đã đọc</string>
+    <string name="label_read_in_year">Sách đã đọc trong năm %1$d</string>
+
+    <!-- Filter / Sort Dialog -->
+    <string name="dialog_filter_title">Lọc sách</string>
+    <string name="dialog_sort_title">Sắp xếp theo</string>
+    <string name="filter_all">Tất cả</string>
+    <string name="sort_title">Tên sách</string>
+    <string name="sort_author">Tác giả</string>
+    <string name="sort_rating">Đánh giá</string>
+    <string name="sort_status">Trạng thái</string>
+
+    <!-- ReadingStatus labels -->
+    <string name="status_unread">Chưa đọc</string>
+    <string name="status_reading">Đang đọc</string>
+    <string name="status_read">Đã đọc</string>
+
+    <!-- Category labels -->
+    <string name="category_science">Khoa học</string>
+    <string name="category_literature">Văn học</string>
+    <string name="category_economics">Kinh tế</string>
+    <string name="category_children">Thiếu nhi</string>
+    <string name="category_life_skills">Kỹ năng sống</string>
+    <string name="category_it">Công nghệ thông tin</string>
+    <string name="category_psychology">Tâm lý học</string>
+    <string name="category_history">Lịch sử</string>
+    <string name="category_other">Khác</string>
+
+    <!-- Share
+         %1$s = title  |  %2$s = author  |  %3$.1f = rating  |  %4$s = status label -->
+    <string name="share_chooser_title">Chia sẻ sách</string>
+    <string name="share_book_format">&#x1F4D6; %1$s\n&#x270D;&#xFE0F; %2$s\n&#x2B50; %3$.1f/5\n%4$s</string>
+
+    <!-- Settings -->
+    <string name="title_settings">Cài đặt</string>
+    <string name="pref_dark_mode">Chế độ tối</string>
+    <string name="pref_language">Ngôn ngữ</string>
+    <string name="lang_vietnamese">Tiếng Việt</string>
+    <string name="lang_english">English</string>
 </resources>

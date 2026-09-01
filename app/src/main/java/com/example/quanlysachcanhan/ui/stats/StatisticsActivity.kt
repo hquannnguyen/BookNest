@@ -1,7 +1,6 @@
-package com.example.quanlysachcanhan.ui.stats
+﻿package com.example.quanlysachcanhan.ui.stats
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.quanlysachcanhan.data.BookRepository
 import com.example.quanlysachcanhan.databinding.ActivityStatisticsBinding
 import com.example.quanlysachcanhan.utils.Constants
@@ -36,11 +35,11 @@ class StatisticsActivity : AppCompatActivity() {
         binding.tvReadInYear.text =
             repository.countReadBooksInYear(year).toString()
 
-        binding.tvYearLabel.text = "Sách đã đọc trong năm $year"
+        binding.tvYearLabel.text = getString(R.string.label_read_in_year, year)
 
-        // TODO PhongVV — STATISTICS:
-        // - biểu đồ theo thể loại
-        // - biểu đồ theo trạng thái
-        // Có thể dùng ProgressBar hoặc MPAndroidChart.
+        // TODO PhongVV - STATISTICS:
+        // - Bieu do theo the loai (Constants.Category.ALL)
+        // - Bieu do theo trang thai doc
+        // Co the dung ProgressBar hoac MPAndroidChart.
     }
 }
