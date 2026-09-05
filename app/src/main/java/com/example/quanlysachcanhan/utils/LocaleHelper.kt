@@ -1,4 +1,4 @@
-﻿package com.example.quanlysachcanhan.utils
+package com.example.quanlysachcanhan.utils
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat

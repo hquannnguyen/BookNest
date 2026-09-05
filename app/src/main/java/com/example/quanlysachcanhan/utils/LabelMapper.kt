@@ -1,4 +1,4 @@
-﻿package com.example.quanlysachcanhan.utils
+package com.example.quanlysachcanhan.utils
 
 import android.content.Context
 import com.example.quanlysachcanhan.R

@@ -1,6 +1,8 @@
-﻿package com.example.quanlysachcanhan.ui.stats
+package com.example.quanlysachcanhan.ui.stats
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.quanlysachcanhan.R
 import com.example.quanlysachcanhan.data.BookRepository
 import com.example.quanlysachcanhan.databinding.ActivityStatisticsBinding
 import com.example.quanlysachcanhan.utils.Constants

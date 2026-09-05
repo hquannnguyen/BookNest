@@ -1,10 +1,13 @@
-﻿package com.example.quanlysachcanhan.adapter
+package com.example.quanlysachcanhan.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.quanlysachcanhan.R
 import com.example.quanlysachcanhan.databinding.ItemBookBinding
 import com.example.quanlysachcanhan.model.Book
+import com.example.quanlysachcanhan.utils.Constants
 import com.example.quanlysachcanhan.utils.getCategoryLabel
 import com.example.quanlysachcanhan.utils.getReadingStatusLabel
 import java.io.File
@@ -45,8 +48,20 @@ class BookAdapter(
             tvAuthor.text = book.author
             ratingBar.rating = book.rating
 
+            // Hiển thị thể loại
+            tvCategory.text = ctx.getCategoryLabel(book.category)
+
             // Dùng mapper: DB code → label đã dịch theo ngôn ngữ hiện tại
             tvStatus.text = ctx.getReadingStatusLabel(book.readingStatus)
+
+            // Badge styling theo từng trạng thái
+            val (bgColor, textColor) = when (book.readingStatus) {
+                Constants.ReadingStatus.READING -> Pair(R.color.status_reading_bg, R.color.status_reading_text)
+                Constants.ReadingStatus.READ -> Pair(R.color.status_read_bg, R.color.status_read_text)
+                else -> Pair(R.color.status_unread_bg, R.color.status_unread_text)
+            }
+            tvStatus.backgroundTintList = ContextCompat.getColorStateList(ctx, bgColor)
+            tvStatus.setTextColor(ContextCompat.getColor(ctx, textColor))
 
             val coverPath = book.coverImagePath
             if (!coverPath.isNullOrBlank()) {
