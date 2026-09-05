@@ -1,13 +1,19 @@
-﻿package com.example.quanlysachcanhan.ui.detail
+package com.example.quanlysachcanhan.ui.detail
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.quanlysachcanhan.R
 import com.example.quanlysachcanhan.adapter.QuoteAdapter
 import com.example.quanlysachcanhan.data.BookRepository
 import com.example.quanlysachcanhan.data.QuoteRepository
 import com.example.quanlysachcanhan.databinding.ActivityBookDetailBinding
+import com.example.quanlysachcanhan.databinding.DialogDeleteBookBinding
 import com.example.quanlysachcanhan.ui.addedit.AddEditBookActivity
 import com.example.quanlysachcanhan.utils.Constants
 import com.example.quanlysachcanhan.utils.ShareUtils
@@ -63,10 +69,7 @@ class BookDetailActivity : AppCompatActivity() {
         }
 
         binding.btnDelete.setOnClickListener {
-            // TODO QuanNH - BOOK DETAIL:
-            // them AlertDialog xac nhan truoc khi delete
-            bookRepository.delete(bookId)
-            finish()
+            showDeleteConfirmationDialog()
         }
 
         binding.btnShare.setOnClickListener {
@@ -92,6 +95,28 @@ class BookDetailActivity : AppCompatActivity() {
         // Dùng mapper để hiển thị đúng ngôn ngữ
         binding.tvCategory.text = getCategoryLabel(book.category)
         binding.tvStatus.text   = getReadingStatusLabel(book.readingStatus)
+    }
+
+    private fun showDeleteConfirmationDialog() {
+        val dialogBinding = DialogDeleteBookBinding.inflate(layoutInflater)
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogBinding.root)
+            .create()
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialogBinding.btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialogBinding.btnDeleteConfirm.setOnClickListener {
+            dialog.dismiss()
+            bookRepository.delete(bookId)
+            Toast.makeText(this, getString(R.string.msg_book_deleted), Toast.LENGTH_SHORT).show()
+            finish()
+        }
+
+        dialog.show()
     }
 
     private fun loadQuotes() {

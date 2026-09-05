@@ -1,9 +1,10 @@
-﻿package com.example.quanlysachcanhan.ui.addedit
+package com.example.quanlysachcanhan.ui.addedit
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import com.example.quanlysachcanhan.R
 import com.example.quanlysachcanhan.data.BookRepository
 import com.example.quanlysachcanhan.databinding.ActivityAddEditBookBinding
@@ -34,6 +35,14 @@ class AddEditBookActivity : AppCompatActivity() {
         setupEvents()
 
         editingBookId = intent.getLongExtra(Constants.Extras.BOOK_ID, 0L)
+        val headerTitle = if (editingBookId > 0L) {
+            getString(R.string.title_edit_book)
+        } else {
+            getString(R.string.title_add_book)
+        }
+        title = headerTitle
+        binding.tvHeaderTitle.text = headerTitle
+
         if (editingBookId > 0L) {
             loadBookForEdit(editingBookId)
         }
@@ -55,8 +64,24 @@ class AddEditBookActivity : AppCompatActivity() {
     }
 
     private fun setupEvents() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
         binding.btnSave.setOnClickListener {
             saveBook()
+        }
+
+        binding.edtTitle.doAfterTextChanged {
+            if (!it.isNullOrBlank()) {
+                binding.edtTitle.error = null
+            }
+        }
+
+        binding.edtAuthor.doAfterTextChanged {
+            if (!it.isNullOrBlank()) {
+                binding.edtAuthor.error = null
+            }
         }
 
         binding.btnChooseCover.setOnClickListener {
@@ -76,6 +101,12 @@ class AddEditBookActivity : AppCompatActivity() {
         binding.edtNote.setText(book.note)
         binding.ratingBar.rating = book.rating
         currentCoverPath = book.coverImagePath
+        if (!currentCoverPath.isNullOrBlank()) {
+            val file = java.io.File(currentCoverPath!!)
+            if (file.exists()) {
+                binding.imgCover.setImageURI(android.net.Uri.fromFile(file))
+            }
+        }
 
         // Tìm index theo mã DB → map sang index label
         val categoryIndex = Constants.Category.ALL.indexOf(book.category).coerceAtLeast(0)
@@ -91,11 +122,13 @@ class AddEditBookActivity : AppCompatActivity() {
 
         if (title.isBlank()) {
             binding.edtTitle.error = getString(R.string.error_title_empty)
+            binding.edtTitle.requestFocus()
             return
         }
 
         if (author.isBlank()) {
             binding.edtAuthor.error = getString(R.string.error_author_empty)
+            binding.edtAuthor.requestFocus()
             return
         }
 
