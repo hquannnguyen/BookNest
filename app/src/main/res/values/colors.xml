@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary & Accent Colors -->
+    <color name="btn_primary">#2563EB</color>
+    <color name="btn_primary_pressed">#1D4ED8</color>
+    <color name="primary_navy">#2563EB</color>
+    <color name="primary_navy_dark">#1E40AF</color>
+    <color name="secondary_oak">#D97706</color>
+    <color name="secondary_oak_dark">#92400E</color>
+
+    <!-- Surfaces & Backgrounds (Light Tone) -->
+    <color name="bg_page">#F8FAFC</color>
+    <color name="surface_card">#FFFFFF</color>
+    <color name="surface_container">#F1F5F9</color>
+    <color name="surface_container_high">#E2E8F0</color>
+
+    <!-- Typography -->
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#64748B</color>
+    <color name="text_hint">#94A3B8</color>
+    <color name="border_color">#E2E8F0</color>
+
+    <!-- Ratings -->
+    <color name="star_gold">#F59E0B</color>
+
+    <!-- Status Badges -->
+    <color name="status_reading_bg">#DBEAFE</color>
+    <color name="status_reading_text">#1D4ED8</color>
+    <color name="status_read_bg">#DCFCE7</color>
+    <color name="status_read_text">#15803D</color>
+    <color name="status_unread_bg">#F1F5F9</color>
+    <color name="status_unread_text">#475569</color>
+
+    <!-- Danger & Dialogs -->
+    <color name="danger">#EF4444</color>
+    <color name="danger_light">#FEE2E2</color>
+    <color name="dialog_bg">#FFFFFF</color>
+    <color name="btn_cancel_bg">#F1F5F9</color>
+    <color name="btn_cancel_text">#334155</color>
+</resources>

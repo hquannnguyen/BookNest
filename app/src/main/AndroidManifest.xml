@@ -1,7 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -23,6 +24,7 @@
 
         <activity
             android:name=".ui.main.MainActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +32,11 @@
             </intent-filter>
         </activity>
 
-        <!-- FileProvider: cần thiết để Member 2 mở Camera và share ảnh
+        <receiver
+            android:name=".utils.ReadingReminderReceiver"
+            android:exported="false" />
+
+        <!-- FileProvider: cần thiết để mở Camera và share ảnh
              trên Android 7+ (API 24+). Không khai báo sẽ crash FileUriExposedException. -->
         <provider
             android:name="androidx.core.content.FileProvider"

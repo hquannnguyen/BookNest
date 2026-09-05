@@ -1,15 +1,55 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App -->
-    <string name="app_name">Quản lý sách cá nhân</string>
+    <string name="app_name">BookNest</string>
 
     <!-- MainActivity -->
+    <string name="title_library">BookNest</string>
     <string name="hint_search">Tìm theo tên sách hoặc tác giả</string>
     <string name="btn_filter">Lọc</string>
     <string name="btn_sort">Sắp xếp</string>
     <string name="btn_statistics">Thống kê</string>
+    <string name="btn_language">Đổi ngôn ngữ</string>
+    <string name="btn_reading_reminder">Thông báo</string>
+    <string name="dialog_language_title">Chọn ngôn ngữ</string>
     <string name="label_empty_books">Chưa có sách nào. Nhấn + để thêm!</string>
     <string name="fab_add_book">Thêm sách</string>
+    <string name="status_all">Tất cả</string>
+    <string name="nav_library">BookNest</string>
+    <string name="nav_search">Tìm kiếm</string>
+    <string name="nav_statistics">Thống kê</string>
+    <string name="nav_settings">Cài đặt</string>
+
+    <!-- Settings Menu -->
+    <string name="title_settings_menu">Cài đặt</string>
+    <string name="menu_item_theme">Chế độ giao diện (Dark / Light mode)</string>
+    <string name="menu_item_reminder">Lập lịch thông báo nhắc nhở đọc sách</string>
+
+    <!-- Notification Bell Dialog -->
+    <string name="title_notifications">Thông báo</string>
+    <string name="notification_bell_active_msg">⏰ Lịch nhắc nhở đọc sách hàng ngày đang bật lúc %1$02d:%2$02d.\n\n📚 Hãy dành chút thời gian tiếp tục đọc sách hôm nay bạn nhé!</string>
+    <string name="notification_bell_inactive_msg">🔕 Bạn chưa bật lịch nhắc nhở đọc sách hàng ngày.\n\n💡 Bạn có thể vào mục Cài đặt ở thanh điều hướng đáy để thiết lập giờ nhắc nhở.</string>
+    <string name="btn_understand">Đã hiểu</string>
+
+    <!-- Reading Reminder Schedule -->
+    <string name="dialog_reminder_title">Lập lịch nhắc nhở đọc sách</string>
+    <string name="dialog_reminder_status_on">Nhắc nhở đang BẬT vào lúc %1$02d:%2$02d hàng ngày.</string>
+    <string name="dialog_reminder_status_off">Nhắc nhở đọc sách hàng ngày đang TẮT.</string>
+    <string name="btn_set_reminder_time">Đặt giờ nhắc nhở</string>
+    <string name="btn_turn_off_reminder">Tắt nhắc nhở</string>
+    <string name="msg_reminder_set">Đã đặt nhắc nhở đọc sách lúc %1$02d:%2$02d mỗi ngày</string>
+    <string name="msg_reminder_disabled">Đã tắt nhắc nhở đọc sách</string>
+    <string name="notification_channel_name">Nhắc nhở đọc sách</string>
+    <string name="notification_channel_desc">Thông báo nhắc duy trì thói quen đọc sách hàng ngày</string>
+    <string name="notification_reminder_title">Đã đến giờ đọc sách! 📚</string>
+    <string name="notification_reminder_message">Hãy dành vài phút để tiếp tục đọc cuốn sách của bạn nhé.</string>
+
+    <!-- Theme Selection -->
+    <string name="dialog_theme_title">Chế độ giao diện</string>
+    <string name="theme_dark">Chế độ tối (Dark mode)</string>
+    <string name="theme_light">Chế độ sáng (Light mode)</string>
+    <string name="theme_system">Theo hệ thống</string>
+    <string name="msg_theme_applied">Đã áp dụng giao diện mới</string>
 
     <!-- AddEditBookActivity -->
     <string name="hint_title">Tên sách</string>
@@ -23,6 +63,9 @@
     <string name="error_author_empty">Vui lòng nhập tác giả</string>
     <string name="msg_book_added">Đã thêm sách</string>
     <string name="msg_book_updated">Đã cập nhật sách</string>
+    <string name="label_category">Thể loại</string>
+    <string name="label_status">Trạng thái đọc</string>
+    <string name="label_rating">Đánh giá ban đầu</string>
 
     <!-- BookDetailActivity -->
     <string name="btn_edit">Sửa</string>
@@ -78,8 +121,7 @@
     <string name="category_history">Lịch sử</string>
     <string name="category_other">Khác</string>
 
-    <!-- Share
-         %1$s = title  |  %2$s = author  |  %3$.1f = rating  |  %4$s = status label -->
+    <!-- Share -->
     <string name="share_chooser_title">Chia sẻ sách</string>
     <string name="share_book_format">&#x1F4D6; %1$s\n&#x270D;&#xFE0F; %2$s\n&#x2B50; %3$.1f/5\n%4$s</string>
 
