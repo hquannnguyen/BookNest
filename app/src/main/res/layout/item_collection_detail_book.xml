@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@color/surface_container_lowest"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="1.5dp"
+    app:strokeColor="@color/border_color"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="14dp">
+
+        <!-- Book Cover Art -->
+        <FrameLayout
+            android:layout_width="74dp"
+            android:layout_height="106dp"
+            android:layout_gravity="top"
+            android:background="@drawable/bg_input_field">
+
+            <ImageView
+                android:id="@+id/ivBookCover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:importantForAccessibility="no"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/ivCoverPlaceholder"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_auto_stories"
+                app:tint="@color/outline_variant" />
+        </FrameLayout>
+
+        <!-- Book Info & Progress -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Title & More Button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvBookTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:fontFamily="serif"
+                    android:maxLines="1"
+                    android:textColor="@color/primary_navy"
+                    android:textSize="15.5sp"
+                    android:textStyle="bold"
+                    tools:text="Đi Tìm Lẽ Sống" />
+
+                <ImageButton
+                    android:id="@+id/btnBookOptions"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Tác vụ"
+                    android:src="@drawable/ic_more_horiz"
+                    app:tint="@color/text_secondary" />
+            </LinearLayout>
+
+            <!-- Author -->
+            <TextView
+                android:id="@+id/tvBookAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/secondary_oak"
+                android:textSize="13sp"
+                tools:text="Viktor Frankl" />
+
+            <!-- Rating Stars -->
+            <LinearLayout
+                android:id="@+id/layoutRatingStars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/ivStar1"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:src="@drawable/ic_star"
+                    app:tint="@color/star_gold" />
+
+                <ImageView
+                    android:id="@+id/ivStar2"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_marginStart="2dp"
+                    android:src="@drawable/ic_star"
+                    app:tint="@color/star_gold" />
+
+                <ImageView
+                    android:id="@+id/ivStar3"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_marginStart="2dp"
+                    android:src="@drawable/ic_star"
+                    app:tint="@color/star_gold" />
+
+                <ImageView
+                    android:id="@+id/ivStar4"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_marginStart="2dp"
+                    android:src="@drawable/ic_star"
+                    app:tint="@color/star_gold" />
+
+                <ImageView
+                    android:id="@+id/ivStar5"
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_marginStart="2dp"
+                    android:src="@drawable/ic_star"
+                    app:tint="@color/star_gold" />
+
+                <TextView
+                    android:id="@+id/tvRatingValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textColor="@color/text_primary"
+                    android:textSize="11.5sp"
+                    android:textStyle="bold"
+                    tools:text="5.0" />
+            </LinearLayout>
+
+            <!-- Status and Page Progress text -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/layoutStatusBadge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivStatusIcon"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_check_circle"
+                        app:tint="@color/secondary_oak" />
+
+                    <TextView
+                        android:id="@+id/tvStatusLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:textColor="@color/secondary_oak"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        tools:text="Đã hoàn thành" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvPageProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11.5sp"
+                    tools:text="216 / 216 tr" />
+            </LinearLayout>
+
+            <!-- Mini Reading Progress Bar -->
+            <ProgressBar
+                android:id="@+id/pbBookReading"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginTop="4dp"
+                android:progressDrawable="@drawable/progress_reading_detail"
+                tools:progress="65" />
+
+            <!-- Bottom Meta Row: Quotes Count & Percent -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="2dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_format_quote"
+                        app:tint="@color/text_hint" />
+
+                    <TextView
+                        android:id="@+id/tvQuoteCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:textColor="@color/text_hint"
+                        android:textSize="11.5sp"
+                        tools:text="12 trích dẫn" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivDoneIcon"
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_done_all"
+                        app:tint="@color/text_hint" />
+
+                    <TextView
+                        android:id="@+id/tvPercentText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:textColor="@color/text_hint"
+                        android:textSize="11.5sp"
+                        tools:text="100%" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
