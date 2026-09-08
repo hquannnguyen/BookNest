@@ -5,6 +5,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -13,19 +15,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.quanlysachcanhan.R
 import com.example.quanlysachcanhan.adapter.BookAdapter
 import com.example.quanlysachcanhan.data.BookRepository
+import com.example.quanlysachcanhan.data.QuoteRepository
 import com.example.quanlysachcanhan.databinding.ActivityMainBinding
 import com.example.quanlysachcanhan.databinding.DialogCustomAlertBinding
 import com.example.quanlysachcanhan.databinding.DialogCustomSelectionBinding
 import com.example.quanlysachcanhan.databinding.ItemDialogOptionBinding
+import com.example.quanlysachcanhan.model.Book
 import com.example.quanlysachcanhan.ui.addedit.AddEditBookActivity
 import com.example.quanlysachcanhan.ui.detail.BookDetailActivity
+import com.example.quanlysachcanhan.ui.settings.SettingsActivity
 import com.example.quanlysachcanhan.ui.stats.StatisticsActivity
 import com.example.quanlysachcanhan.utils.Constants
 import com.example.quanlysachcanhan.utils.LocaleHelper
+import com.example.quanlysachcanhan.utils.NavigationHelper
 import com.example.quanlysachcanhan.utils.PreferenceManager
 import com.example.quanlysachcanhan.utils.ReadingReminderHelper
 import com.example.quanlysachcanhan.utils.getCategoryLabels
@@ -34,12 +40,22 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var repository: BookRepository
+    private lateinit var quoteRepository: QuoteRepository
     private lateinit var preferenceManager: PreferenceManager
     private lateinit var adapter: BookAdapter
 
     private var keyword: String = ""
     private var selectedCategory: String? = null
     private var selectedStatus: String? = null
+    private var isFavoriteFilter: Boolean = false
+
+    private val bannerQuoteHandler = Handler(Looper.getMainLooper())
+    private val bannerQuoteRunnable = object : Runnable {
+        override fun run() {
+            setupDailyQuoteBanner(forceRefresh = true, withAnimation = true)
+            bannerQuoteHandler.postDelayed(this, BANNER_AUTO_TRANSITION_INTERVAL_MS)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         preferenceManager = PreferenceManager(this)
@@ -51,59 +67,221 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         repository = BookRepository(this)
+        quoteRepository = QuoteRepository(this)
 
         setupRecyclerView()
         setupStatusChips()
         setupLanguageBadge()
+        setupReminderDot()
+        setupDailyQuoteBanner()
         updateFilterLabel()
         updateSortLabel()
         setupEvents()
+
+        if (intent.getBooleanExtra(NavigationHelper.EXTRA_OPEN_FILTER, false)) {
+            showFilterDialog()
+        }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        if (intent.getBooleanExtra(NavigationHelper.EXTRA_OPEN_FILTER, false)) {
+            showFilterDialog()
+        }
     }
 
     override fun onResume() {
         super.onResume()
         setupLanguageBadge()
+        setupReminderDot()
+        setupDailyQuoteBanner(forceRefresh = false, withAnimation = false)
+        startBannerAutoTransition()
         updateFilterLabel()
         updateSortLabel()
+        updateChipCounts()
         loadBooks()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopBannerAutoTransition()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopBannerAutoTransition()
+    }
+
+    private fun startBannerAutoTransition() {
+        bannerQuoteHandler.removeCallbacks(bannerQuoteRunnable)
+        bannerQuoteHandler.postDelayed(bannerQuoteRunnable, BANNER_AUTO_TRANSITION_INTERVAL_MS)
+    }
+
+    private fun stopBannerAutoTransition() {
+        bannerQuoteHandler.removeCallbacks(bannerQuoteRunnable)
     }
 
     private fun setupRecyclerView() {
         adapter = BookAdapter { book ->
-            startActivity(
-                Intent(this, BookDetailActivity::class.java)
-                    .putExtra(Constants.Extras.BOOK_ID, book.id)
-            )
+            val intent = Intent(this, BookDetailActivity::class.java).apply {
+                putExtra(Constants.Extras.BOOK_ID, book.id)
+            }
+            NavigationHelper.startActivitySlide(this, intent)
         }
 
-        binding.recyclerBooks.layoutManager = LinearLayoutManager(this)
+        // Cấu hình danh sách dạng lưới 2 cột như thiết kế Stitch
+        binding.recyclerBooks.layoutManager = GridLayoutManager(this, 2)
         binding.recyclerBooks.adapter = adapter
     }
 
+    private fun setupDailyQuoteBanner(forceRefresh: Boolean = false, withAnimation: Boolean = false) {
+        val now = System.currentTimeMillis()
+        val cachedContent = preferenceManager.bannerQuoteContent
+        val cachedTitle = preferenceManager.bannerQuoteBookTitle
+
+        // Nếu không yêu cầu làm mới và đã có câu trích dẫn lưu trước đó, hiển thị ngay
+        if (!forceRefresh && !cachedContent.isNullOrBlank()) {
+            binding.tvDailyQuote.alpha = 1f
+            binding.tvDailyQuote.translationY = 0f
+            binding.tvDailyQuote.text = cachedContent
+            binding.tvBannerTime.alpha = 0.75f
+            binding.tvBannerTime.text = cachedTitle ?: getString(R.string.banner_quote_time)
+            return
+        }
+
+        val allBooks = repository.getBooks()
+        val allQuotes = allBooks.flatMap { quoteRepository.getByBookId(it.id) }
+
+        val newContent: String
+        val newTitle: String
+
+        if (allQuotes.isNotEmpty()) {
+            val candidateQuotes = if (allQuotes.size > 1 && !cachedContent.isNullOrBlank()) {
+                allQuotes.filter { "“${it.content.trim()}”" != cachedContent }
+            } else {
+                allQuotes
+            }.ifEmpty { allQuotes }
+
+            val chosen = candidateQuotes.random()
+            val book = allBooks.find { it.id == chosen.bookId }
+            newContent = "“${chosen.content.trim()}”"
+            newTitle = book?.title ?: getString(R.string.banner_quote_time)
+        } else {
+            val fallbackQuotes = listOf(
+                Pair(
+                    "“Khi bạn thực sự mong muốn một điều gì, cả vũ trụ sẽ hợp sức giúp bạn đạt được.”",
+                    "Nhà Giả Kim"
+                ),
+                Pair(
+                    "“Người có một lý do để sống có thể chịu đựng được hầu như mọi nghịch cảnh.”",
+                    "Đi Tìm Lẽ Sống"
+                ),
+                Pair(
+                    "“Một cuốn sách hay trên giá là một người bạn sẵn sàng trò chuyện bất cứ lúc nào.”",
+                    "Gợi ý hôm nay"
+                ),
+                Pair(
+                    "“Đọc sách không chỉ để biết nhiều hơn, mà để thấu hiểu sâu hơn.”",
+                    "Gợi ý hôm nay"
+                ),
+                Pair(
+                    "“Hôm nay là một người đọc sách, ngày mai sẽ là một người dẫn đường.”",
+                    "Margaret Fuller"
+                )
+            )
+
+            val candidateFallbacks = if (fallbackQuotes.size > 1 && !cachedContent.isNullOrBlank()) {
+                fallbackQuotes.filter { it.first != cachedContent }
+            } else {
+                fallbackQuotes
+            }.ifEmpty { fallbackQuotes }
+
+            val chosen = candidateFallbacks.random()
+            newContent = chosen.first
+            newTitle = chosen.second
+        }
+
+        preferenceManager.bannerQuoteContent = newContent
+        preferenceManager.bannerQuoteBookTitle = newTitle
+        preferenceManager.bannerQuoteTime = now
+
+        if (withAnimation) {
+            val fadeOut = 220L
+            val fadeIn = 320L
+            binding.tvDailyQuote.animate()
+                .alpha(0f)
+                .translationY(-8f)
+                .setDuration(fadeOut)
+                .withEndAction {
+                    binding.tvDailyQuote.text = newContent
+                    binding.tvDailyQuote.translationY = 8f
+                    binding.tvDailyQuote.animate()
+                        .alpha(1f)
+                        .translationY(0f)
+                        .setDuration(fadeIn)
+                        .start()
+                }.start()
+
+            binding.tvBannerTime.animate()
+                .alpha(0f)
+                .setDuration(fadeOut)
+                .withEndAction {
+                    binding.tvBannerTime.text = newTitle
+                    binding.tvBannerTime.animate()
+                        .alpha(0.75f)
+                        .setDuration(fadeIn)
+                        .start()
+                }.start()
+        } else {
+            binding.tvDailyQuote.alpha = 1f
+            binding.tvDailyQuote.translationY = 0f
+            binding.tvDailyQuote.text = newContent
+            binding.tvBannerTime.alpha = 0.75f
+            binding.tvBannerTime.text = newTitle
+        }
+    }
+
+    private fun setupReminderDot() {
+        binding.viewReminderDot.visibility =
+            if (preferenceManager.reminderEnabled) View.VISIBLE else View.GONE
+    }
+
+    private fun updateChipCounts() {
+        val allBooks = repository.getBooks()
+        val totalCount = allBooks.size
+        val unreadCount = allBooks.count { it.readingStatus == Constants.ReadingStatus.UNREAD }
+        val readingCount = allBooks.count { it.readingStatus == Constants.ReadingStatus.READING }
+        val readCount = allBooks.count { it.readingStatus == Constants.ReadingStatus.READ }
+
+        binding.chipAll.text = "${getString(R.string.status_all)} ($totalCount)"
+        binding.chipUnread.text = "${getString(R.string.status_unread)} ($unreadCount)"
+        binding.chipReading.text = "${getString(R.string.status_reading)} ($readingCount)"
+        binding.chipRead.text = "${getString(R.string.status_read)} ($readCount)"
+    }
+
     private fun setupStatusChips() {
-        val chips = listOf(
-            Triple(binding.chipAll, null, true),
-            Triple(binding.chipReading, Constants.ReadingStatus.READING, false),
-            Triple(binding.chipRead, Constants.ReadingStatus.READ, false),
-            Triple(binding.chipUnread, Constants.ReadingStatus.UNREAD, false)
+        val statusViews = listOf(
+            Pair(binding.chipAll, null),
+            Pair(binding.chipUnread, Constants.ReadingStatus.UNREAD),
+            Pair(binding.chipReading, Constants.ReadingStatus.READING),
+            Pair(binding.chipRead, Constants.ReadingStatus.READ)
         )
 
-        fun updateChipsUI(selectedView: TextView) {
-            chips.forEach { (view, _, _) ->
-                if (view == selectedView) {
-                    view.setBackgroundResource(R.drawable.bg_chip_selected)
-                    view.setTextColor(ContextCompat.getColor(this, android.R.color.white))
-                } else {
-                    view.setBackgroundResource(R.drawable.bg_chip_unselected)
-                    view.setTextColor(ContextCompat.getColor(this, R.color.text_secondary))
-                }
+        fun resetStatusChipsUI() {
+            statusViews.forEach { (view, _) ->
+                view.setBackgroundResource(R.drawable.bg_chip_unselected)
+                view.setTextColor(ContextCompat.getColor(this, R.color.text_secondary))
             }
         }
 
-        chips.forEach { (view, status, _) ->
+        statusViews.forEach { (view, status) ->
             view.setOnClickListener {
+                isFavoriteFilter = false
                 selectedStatus = status
-                updateChipsUI(view)
+                resetStatusChipsUI()
+                view.setBackgroundResource(R.drawable.bg_chip_selected)
+                view.setTextColor(Color.WHITE)
                 loadBooks()
             }
         }
@@ -147,21 +325,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupEvents() {
-        binding.edtSearch.addTextChangedListener {
-            keyword = it?.toString().orEmpty()
+        // Ô tìm kiếm sách trong tủ sách
+        binding.edtSearch.addTextChangedListener { editable ->
+            keyword = editable?.toString()?.trim() ?: ""
             loadBooks()
         }
 
-        // Top Header: Nút ngôn ngữ mở dialog chọn ngôn ngữ
+        // Chạm vào banner để đổi trích dẫn khác theo nhu cầu
+        binding.cardBannerQuote.setOnClickListener {
+            setupDailyQuoteBanner(forceRefresh = true, withAnimation = true)
+            startBannerAutoTransition()
+        }
+
+        // Top Header: Nút ngôn ngữ
         binding.btnLanguage.setOnClickListener {
             showLanguageDialog()
         }
 
-        // Top Header: Chuông chỉ để xem thông báo
+        // Top Header: Chuông thông báo
         binding.btnReminder.setOnClickListener {
             showNotificationCenterDialog()
         }
 
+        // Dải nút Lọc thể loại & Sắp xếp
         binding.btnFilter.setOnClickListener {
             showFilterDialog()
         }
@@ -170,29 +356,23 @@ class MainActivity : AppCompatActivity() {
             showSortDialog()
         }
 
+        // Nút FAB thêm sách
         binding.fabAddBook.setOnClickListener {
-            startActivity(Intent(this, AddEditBookActivity::class.java))
+            NavigationHelper.startActivitySlide(this, Intent(this, AddEditBookActivity::class.java))
         }
 
         // Bottom Navigation Events
-        binding.navLibrary.setOnClickListener {
-            binding.recyclerBooks.smoothScrollToPosition(0)
-        }
-
-        binding.navSearch.setOnClickListener {
-            binding.edtSearch.requestFocus()
-            val imm = getSystemService(INPUT_METHOD_SERVICE) as? android.view.inputmethod.InputMethodManager
-            imm?.showSoftInput(binding.edtSearch, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT)
-        }
-
-        binding.navStatistics.setOnClickListener {
-            startActivity(Intent(this, StatisticsActivity::class.java))
-        }
-
-        // Bottom Navigation: Cài đặt mở Menu gồm Dark/Light mode & Lập lịch thông báo
-        binding.navSettings.setOnClickListener {
-            showSettingsMenu()
-        }
+        NavigationHelper.setupBottomNavigation(
+            this,
+            NavigationHelper.Tab.LIBRARY,
+            binding.navLibrary,
+            binding.navCollections,
+            binding.navStatistics,
+            binding.navSettings,
+            onLibraryReselect = {
+                binding.recyclerBooks.smoothScrollToPosition(0)
+            }
+        )
     }
 
     private fun showLanguageDialog() {
@@ -343,6 +523,7 @@ class MainActivity : AppCompatActivity() {
                 dialog.dismiss()
                 preferenceManager.reminderEnabled = false
                 ReadingReminderHelper.cancelReminder(this)
+                setupReminderDot()
                 Toast.makeText(this, R.string.msg_reminder_disabled, Toast.LENGTH_SHORT).show()
             }
         }
@@ -362,6 +543,7 @@ class MainActivity : AppCompatActivity() {
                 preferenceManager.reminderMinute = selectedMinute
 
                 ReadingReminderHelper.scheduleReminder(this, selectedHour, selectedMinute)
+                setupReminderDot()
 
                 Toast.makeText(
                     this,
@@ -519,15 +701,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadBooks() {
-        val books = repository.getBooks(
+        var books = repository.getBooks(
             keyword = keyword,
             category = selectedCategory,
             status = selectedStatus,
             sortBy = preferenceManager.sortType
         )
+
+        if (isFavoriteFilter) {
+            books = books.filter { it.rating >= 4.0f }
+        }
+
         adapter.submitList(books)
         binding.layoutEmpty.visibility =
             if (books.isEmpty()) View.VISIBLE
             else View.GONE
+    }
+
+    companion object {
+        // Chu kỳ tự động chuyển câu trích dẫn: 15 giây (thời gian lý tưởng để đọc và cảm nhận)
+        private const val BANNER_AUTO_TRANSITION_INTERVAL_MS = 15_000L
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_page">
@@ -10,50 +11,45 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Top Header / App Bar -->
+        <!-- Top Header / App Bar (Literary Sanctuary Header) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="@color/surface_card"
-            android:elevation="2dp"
+            android:elevation="1dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp">
-
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:contentDescription="@string/title_library"
-                android:src="@drawable/ic_book_open" />
 
             <TextView
                 android:id="@+id/tvHeaderTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_weight="1"
+                android:fontFamily="serif"
+                android:letterSpacing="-0.01"
                 android:text="@string/title_library"
-                android:textColor="@color/text_primary"
-                android:textSize="20sp"
+                android:textColor="@color/primary_navy"
+                android:textSize="23sp"
                 android:textStyle="bold" />
 
-            <!-- Language Switch Badge (Flag + Code) -->
+            <!-- Language Switch Capsule (Flag + Code) -->
             <LinearLayout
                 android:id="@+id/btnLanguage"
                 android:layout_width="wrap_content"
-                android:layout_height="38dp"
+                android:layout_height="34dp"
                 android:background="@drawable/bg_lang_badge"
                 android:clickable="true"
+                android:contentDescription="@string/btn_language"
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="10dp"
-                android:contentDescription="@string/btn_language">
+                android:paddingHorizontal="10dp">
 
                 <ImageView
                     android:id="@+id/ivLangFlag"
-                    android:layout_width="22dp"
-                    android:layout_height="15dp"
+                    android:layout_width="20dp"
+                    android:layout_height="14dp"
                     android:importantForAccessibility="no"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_flag_vn" />
@@ -62,278 +58,459 @@
                     android:id="@+id/tvLangCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
+                    android:layout_marginStart="5dp"
                     android:text="VI"
-                    android:textColor="@color/text_primary"
-                    android:textSize="13sp"
+                    android:textColor="@color/primary_navy"
+                    android:textSize="12sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <!-- Reading Reminder Notification Bell Button -->
-            <ImageButton
+            <!-- Reading Reminder Notification Bell Button with Indicator Dot -->
+            <FrameLayout
                 android:id="@+id/btnReminder"
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/bg_btn_icon_action"
+                android:clickable="true"
                 android:contentDescription="@string/btn_reading_reminder"
-                android:src="@drawable/ic_notifications" />
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_notifications"
+                    app:tint="@color/text_primary" />
+
+                <!-- Active Dot -->
+                <View
+                    android:id="@+id/viewReminderDot"
+                    android:layout_width="7dp"
+                    android:layout_height="7dp"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="@color/secondary_oak"
+                    android:visibility="gone" />
+            </FrameLayout>
         </LinearLayout>
 
-        <!-- Search Bar -->
+        <!-- Pinned / Sticky Search Bar Container -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="14dp"
-            android:background="@drawable/bg_search_bar"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="14dp">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:importantForAccessibility="no"
-                android:src="@drawable/ic_search" />
-
-            <EditText
-                android:id="@+id/edtSearch"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:background="@android:color/transparent"
-                android:hint="@string/hint_search"
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/text_primary"
-                android:textColorHint="@color/text_hint"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <!-- Reading Status Chips Row -->
-        <HorizontalScrollView
+            android:id="@+id/layoutPinnedSearchBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:scrollbars="none">
+            android:background="@color/bg_page"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="6dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_search_bar"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="16dp">
-
-                <TextView
-                    android:id="@+id/chipAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:background="@drawable/bg_chip_selected"
-                    android:gravity="center"
-                    android:paddingHorizontal="14dp"
-                    android:text="@string/status_all"
-                    android:textColor="#FFFFFF"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/chipReading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/bg_chip_unselected"
-                    android:gravity="center"
-                    android:paddingHorizontal="14dp"
-                    android:text="@string/status_reading"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/chipRead"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/bg_chip_unselected"
-                    android:gravity="center"
-                    android:paddingHorizontal="14dp"
-                    android:text="@string/status_read"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/chipUnread"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/bg_chip_unselected"
-                    android:gravity="center"
-                    android:paddingHorizontal="14dp"
-                    android:text="@string/status_unread"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </HorizontalScrollView>
-
-        <!-- Filter & Sort Action Row (Below Reading Status Chips) -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp">
-
-            <!-- Filter (Category) Pill Button -->
-            <LinearLayout
-                android:id="@+id/btnFilter"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="6dp"
-                android:background="@drawable/bg_btn_filter_sort"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingHorizontal="12dp">
+                android:paddingHorizontal="14dp">
 
                 <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:importantForAccessibility="no"
-                    android:src="@drawable/ic_filter_list" />
+                    android:src="@drawable/ic_search"
+                    app:tint="@color/text_hint" />
 
-                <TextView
-                    android:id="@+id/tvFilterLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:ellipsize="end"
+                <EditText
+                    android:id="@+id/edtSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/hint_search"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
                     android:maxLines="1"
-                    android:text="@string/btn_filter"
+                    android:singleLine="true"
                     android:textColor="@color/text_primary"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- Sort Pill Button -->
-            <LinearLayout
-                android:id="@+id/btnSort"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:layout_marginStart="6dp"
-                android:background="@drawable/bg_btn_filter_sort"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingHorizontal="12dp">
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/ic_sort" />
-
-                <TextView
-                    android:id="@+id/tvSortLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="@string/btn_sort"
-                    android:textColor="@color/text_primary"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="13.5sp" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Main Content Area (RecyclerView + Empty State) -->
-        <FrameLayout
+        <!-- Nested Content with Banner, Chips, Filter, and Grid -->
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:fillViewport="true">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerBooks"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingHorizontal="16dp"
-                android:paddingTop="6dp"
-                android:paddingBottom="120dp" />
-
-            <!-- Empty State -->
             <LinearLayout
-                android:id="@+id/layoutEmpty"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
                 android:orientation="vertical"
-                android:padding="24dp"
-                android:visibility="gone">
+                android:paddingBottom="90dp">
 
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:alpha="0.35"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/ic_book_open" />
+                <!-- Daily Inspiration Banner: "Hôm nay đọc gì?" -->
+                <LinearLayout
+                    android:id="@+id/cardBannerQuote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_banner_quote"
+                    android:orientation="horizontal"
+                    android:padding="13dp">
 
-                <TextView
-                    android:id="@+id/tvEmpty"
-                    android:layout_width="wrap_content"
+                    <!-- Book Icon Squarish Container -->
+                    <FrameLayout
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/bg_status_badge"
+                        android:backgroundTint="#26FFFFFF">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_auto_stories"
+                            app:tint="@color/secondary_container" />
+                    </FrameLayout>
+
+                    <!-- Quote Text Content -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:letterSpacing="0.08"
+                                android:text="@string/banner_quote_title"
+                                android:textColor="@color/secondary_container"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvBannerTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:alpha="0.75"
+                                android:text="@string/banner_quote_time"
+                                android:textColor="#FFFFFF"
+                                android:textSize="10.5sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvDailyQuote"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:ellipsize="end"
+                            android:fontFamily="serif"
+                            android:lineSpacingExtra="2dp"
+                            android:maxLines="2"
+                            android:text="@string/banner_quote_default"
+                            android:textColor="#FFFFFF"
+                            android:textSize="13sp"
+                            android:textStyle="italic" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Horizontal Scrollable Category & State Chips -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="16dp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!-- Chip: Tất cả -->
+                        <TextView
+                            android:id="@+id/chipAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:background="@drawable/bg_chip_selected"
+                            android:gravity="center"
+                            android:paddingHorizontal="14dp"
+                            android:text="Tất cả (0)"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <!-- Chip: Chưa đọc -->
+                        <TextView
+                            android:id="@+id/chipUnread"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:layout_marginStart="7dp"
+                            android:background="@drawable/bg_chip_unselected"
+                            android:gravity="center"
+                            android:paddingHorizontal="14dp"
+                            android:text="Chưa đọc (0)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <!-- Chip: Đang đọc -->
+                        <TextView
+                            android:id="@+id/chipReading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:layout_marginStart="7dp"
+                            android:background="@drawable/bg_chip_unselected"
+                            android:gravity="center"
+                            android:paddingHorizontal="14dp"
+                            android:text="Đang đọc (0)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <!-- Chip: Đã đọc -->
+                        <TextView
+                            android:id="@+id/chipRead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:layout_marginStart="7dp"
+                            android:background="@drawable/bg_chip_unselected"
+                            android:gravity="center"
+                            android:paddingHorizontal="14dp"
+                            android:text="Đã đọc (0)"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <!-- Filter & Sort Control Strip -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- Filter (Category) Pill Button -->
+                    <LinearLayout
+                        android:id="@+id/btnFilter"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_btn_filter_sort"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="10dp">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_category"
+                            app:tint="@color/secondary_oak" />
+
+                        <TextView
+                            android:id="@+id/tvFilterLabel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Thể loại: Tất cả"
+                            android:textColor="@color/text_primary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_dropdown"
+                            app:tint="@color/text_hint" />
+                    </LinearLayout>
+
+                    <!-- Sort Pill Button -->
+                    <LinearLayout
+                        android:id="@+id/btnSort"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_btn_filter_sort"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="10dp">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_swap_vert"
+                            app:tint="@color/secondary_oak" />
+
+                        <TextView
+                            android:id="@+id/tvSortLabel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Sắp xếp: Tên sách"
+                            android:textColor="@color/text_primary"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_dropdown"
+                            app:tint="@color/text_hint" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Books Grid Container -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:minHeight="250dp">
+
+                    <!-- 2-Column Responsive Book Cards Grid -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerBooks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingHorizontal="11dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="12dp"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="2"
+                        tools:itemCount="4"
+                        tools:listitem="@layout/item_book" />
+
+                    <!-- Empty State -->
+                    <LinearLayout
+                        android:id="@+id/layoutEmpty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="32dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:alpha="0.3"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_book_open"
+                            app:tint="@color/text_hint" />
+
+                        <TextView
+                            android:id="@+id/tvEmpty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:gravity="center"
+                            android:lineSpacingExtra="3dp"
+                            android:text="@string/label_empty_books"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <!-- Offline Status Micro-Indicator -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
-                    android:text="@string/label_empty_books"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal"
+                    android:paddingVertical="8dp">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_cloud_done"
+                        app:tint="@color/secondary_oak" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:text="@string/offline_status_hint"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
             </LinearLayout>
-        </FrameLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 
-    <!-- Floating Action Button for Adding Book -->
+    <!-- Floating Action Button for Adding Book (Midnight Navy Circle) -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="76dp"
         android:contentDescription="@string/fab_add_book"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/btn_primary"
+        app:backgroundTint="@color/primary_navy"
         app:elevation="6dp"
-        app:fabCustomSize="56dp"
-        app:maxImageSize="28dp"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium"
+        app:fabCustomSize="54dp"
+        app:maxImageSize="26dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
         app:tint="#FFFFFF" />
 
-    <!-- Bottom Navigation Bar -->
+    <!-- Bottom Navigation Bar (Literary Sanctuary Style) -->
     <LinearLayout
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="60dp"
         android:layout_gravity="bottom"
         android:background="@color/surface_card"
         android:elevation="12dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingHorizontal="8dp">
+        android:paddingHorizontal="4dp">
 
-        <!-- Item 1:  (Active) -->
+        <!-- Item 1: BookNest (Active) -->
         <LinearLayout
             android:id="@+id/navLibrary"
             android:layout_width="0dp"
@@ -357,16 +534,16 @@
                 android:id="@+id/textNavLibrary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/nav_library"
                 android:textColor="@color/secondary_oak"
                 android:textSize="11sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Item 2: Tìm kiếm -->
+        <!-- Item 2: Bộ sưu tập -->
         <LinearLayout
-            android:id="@+id/navSearch"
+            android:id="@+id/navCollections"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -377,19 +554,19 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/iconNavSearch"
+                android:id="@+id/iconNavCollections"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:importantForAccessibility="no"
-                android:src="@drawable/ic_search"
+                android:src="@drawable/ic_collections_bookmark"
                 app:tint="@color/text_secondary" />
 
             <TextView
-                android:id="@+id/textNavSearch"
+                android:id="@+id/textNavCollections"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="@string/nav_search"
+                android:layout_marginTop="2dp"
+                android:text="@string/nav_collections"
                 android:textColor="@color/text_secondary"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -418,7 +595,7 @@
                 android:id="@+id/textNavStatistics"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/nav_statistics"
                 android:textColor="@color/text_secondary"
                 android:textSize="11sp" />
@@ -448,7 +625,7 @@
                 android:id="@+id/textNavSettings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="2dp"
                 android:text="@string/nav_settings"
                 android:textColor="@color/text_secondary"
                 android:textSize="11sp" />
