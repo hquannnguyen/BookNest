@@ -161,17 +161,31 @@ class CollectionRepository(context: Context) {
             arrayOf(collectionId.toString(), bookId.toString())
         )
         if (rows > 0) {
-            val values = ContentValues().apply {
-                put(DatabaseHelper.COL_COLLECTION_UPDATED_AT, System.currentTimeMillis())
+            val remaining = getBookIdsInCollection(collectionId)
+            if (remaining.isEmpty()) {
+                delete(collectionId)
+            } else {
+                val values = ContentValues().apply {
+                    put(DatabaseHelper.COL_COLLECTION_UPDATED_AT, System.currentTimeMillis())
+                }
+                db.update(
+                    DatabaseHelper.TABLE_COLLECTIONS,
+                    values,
+                    "${DatabaseHelper.COL_COLLECTION_ID} = ?",
+                    arrayOf(collectionId.toString())
+                )
             }
-            db.update(
-                DatabaseHelper.TABLE_COLLECTIONS,
-                values,
-                "${DatabaseHelper.COL_COLLECTION_ID} = ?",
-                arrayOf(collectionId.toString())
-            )
         }
         return rows > 0
+    }
+
+    fun cleanupEmptyCollections(): Int {
+        val db = dbHelper.writableDatabase
+        return db.delete(
+            DatabaseHelper.TABLE_COLLECTIONS,
+            "${DatabaseHelper.COL_COLLECTION_ID} NOT IN (SELECT DISTINCT ${DatabaseHelper.COL_CB_COLLECTION_ID} FROM ${DatabaseHelper.TABLE_COLLECTION_BOOKS})",
+            null
+        )
     }
 
     fun getCollectionWithStats(collectionId: Long): CollectionWithStats? {
@@ -181,6 +195,7 @@ class CollectionRepository(context: Context) {
     }
 
     fun getAllWithStats(): List<CollectionWithStats> {
+        cleanupEmptyCollections()
         val db = dbHelper.readableDatabase
         val collections = mutableListOf<BookCollection>()
 
@@ -295,6 +310,7 @@ class CollectionRepository(context: Context) {
     }
 
     fun seedSampleCollectionsIfEmpty(allBooks: List<Book>) {
+        if (allBooks.isEmpty()) return
         val db = dbHelper.readableDatabase
         val cursor = db.rawQuery("SELECT COUNT(*) FROM ${DatabaseHelper.TABLE_COLLECTIONS}", null)
         val count = cursor.use { if (it.moveToFirst()) it.getInt(0) else 0 }

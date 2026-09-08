@@ -1124,13 +1124,15 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/iconNavLibrary"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:importantForAccessibility="no"
-                android:src="@drawable/ic_auto_stories"
+                android:src="@drawable/ic_book_open"
                 app:tint="@color/text_secondary" />
 
             <TextView
+                android:id="@+id/textNavLibrary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"

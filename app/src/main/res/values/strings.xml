@@ -16,7 +16,7 @@
     <string name="fab_add_book">Thêm sách</string>
     <string name="status_all">Tất cả</string>
     <string name="status_favorite">Yêu thích</string>
-    <string name="nav_library">BookNest</string>
+    <string name="nav_library">Tủ sách</string>
     <string name="nav_collections">Bộ sưu tập</string>
     <string name="nav_search">Tìm kiếm</string>
     <string name="nav_statistics">Thống kê</string>

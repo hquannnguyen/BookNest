@@ -56,14 +56,7 @@ class CollectionAdapter(
             binding.tvCollectionSub.text = "${item.totalBooks} cuốn sách • $timeStr"
 
             // 2. Icon & Color
-            val iconRes = when (col.iconName) {
-                "psychology" -> R.drawable.ic_psychology
-                "trending_up" -> R.drawable.ic_trending_up
-                "account_balance" -> R.drawable.ic_account_balance
-                "favorite" -> R.drawable.ic_favorite
-                "science" -> R.drawable.ic_science
-                else -> R.drawable.ic_auto_stories
-            }
+            val iconRes = com.example.quanlysachcanhan.utils.CollectionIconHelper.getIconResource(col.iconName)
             binding.ivCollectionIcon.setImageResource(iconRes)
 
             try {

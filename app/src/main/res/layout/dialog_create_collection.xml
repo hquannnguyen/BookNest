@@ -125,126 +125,197 @@
             android:textSize="10.5sp"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/layoutColors"
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:scrollbars="none">
 
-            <FrameLayout
-                android:id="@+id/colorNavy"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:background="@drawable/bg_status_badge"
-                android:backgroundTint="@color/primary_navy"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:id="@+id/checkNavy"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_check"
-                    app:tint="@color/surface_card" />
-            </FrameLayout>
+            <LinearLayout
+                android:id="@+id/layoutColors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <FrameLayout
-                android:id="@+id/colorOak"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_status_badge"
-                android:backgroundTint="@color/secondary_oak"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:id="@+id/checkOak"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_check"
-                    android:visibility="gone"
-                    app:tint="@color/surface_card" />
-            </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/colorNavy"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="@color/primary_navy"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkNavy"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/colorAmber"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_status_badge"
-                android:backgroundTint="@color/secondary_container"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:id="@+id/checkAmber"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_check"
-                    android:visibility="gone"
-                    app:tint="@color/primary_navy" />
-            </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/colorOak"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="@color/secondary_oak"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkOak"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/colorSlate"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_status_badge"
-                android:backgroundTint="#4E5F7E"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:id="@+id/checkSlate"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_check"
-                    android:visibility="gone"
-                    app:tint="@color/surface_card" />
-            </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/colorAmber"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="@color/secondary_container"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkAmber"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/primary_navy" />
+                </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/colorGold"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_status_badge"
-                android:backgroundTint="@color/star_gold"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:id="@+id/checkGold"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_check"
-                    android:visibility="gone"
-                    app:tint="@color/surface_card" />
-            </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/colorSlate"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="#4E5F7E"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkSlate"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/colorDark"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_status_badge"
-                android:backgroundTint="#2C1600"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:id="@+id/checkDark"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_check"
-                    android:visibility="gone"
-                    app:tint="@color/surface_card" />
-            </FrameLayout>
-        </LinearLayout>
+                <FrameLayout
+                    android:id="@+id/colorGold"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="@color/star_gold"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkGold"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/colorDark"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="#2C1600"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkDark"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/colorGreen"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="#2E7D32"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkGreen"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/colorRuby"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="#C2185B"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkRuby"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
+
+                <!-- Ô tròn 3 chấm: Tự chọn màu trong hệ thống màu -->
+                <FrameLayout
+                    android:id="@+id/btnColorMore"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="@color/outline_variant"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/ivColorMoreIcon"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_more_horiz"
+                        app:tint="@color/text_primary" />
+                    <ImageView
+                        android:id="@+id/checkColorMore"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
 
         <!-- Icon Picker Grid -->
         <TextView
@@ -268,7 +339,7 @@
                 android:id="@+id/btnIconStories"
                 android:layout_width="0dp"
                 android:layout_height="34dp"
-                android:layout_marginEnd="3dp"
+                android:layout_marginEnd="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_chip_selected"
                 android:clickable="true"
@@ -286,7 +357,7 @@
                 android:id="@+id/btnIconPsychology"
                 android:layout_width="0dp"
                 android:layout_height="34dp"
-                android:layout_marginHorizontal="3dp"
+                android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_chip_unselected"
                 android:clickable="true"
@@ -304,7 +375,7 @@
                 android:id="@+id/btnIconTrending"
                 android:layout_width="0dp"
                 android:layout_height="34dp"
-                android:layout_marginHorizontal="3dp"
+                android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_chip_unselected"
                 android:clickable="true"
@@ -322,7 +393,7 @@
                 android:id="@+id/btnIconFinance"
                 android:layout_width="0dp"
                 android:layout_height="34dp"
-                android:layout_marginHorizontal="3dp"
+                android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_chip_unselected"
                 android:clickable="true"
@@ -340,7 +411,7 @@
                 android:id="@+id/btnIconFavorite"
                 android:layout_width="0dp"
                 android:layout_height="34dp"
-                android:layout_marginHorizontal="3dp"
+                android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_chip_unselected"
                 android:clickable="true"
@@ -358,7 +429,7 @@
                 android:id="@+id/btnIconScience"
                 android:layout_width="0dp"
                 android:layout_height="34dp"
-                android:layout_marginStart="3dp"
+                android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_chip_unselected"
                 android:clickable="true"
@@ -369,6 +440,25 @@
                     android:layout_height="18dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_science"
+                    app:tint="@color/primary_navy" />
+            </FrameLayout>
+
+            <!-- Ô 3 chấm: Tự chọn biểu tượng trong thư viện icon -->
+            <FrameLayout
+                android:id="@+id/btnIconMore"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chip_unselected"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:id="@+id/ivIconMore"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_more_horiz"
                     app:tint="@color/primary_navy" />
             </FrameLayout>
         </LinearLayout>

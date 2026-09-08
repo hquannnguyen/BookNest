@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_card"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvColorDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bảng màu biểu tượng"
+        android:textColor="@color/text_primary"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Chọn một màu từ hệ thống hoặc nhập mã màu tùy thích"
+        android:textColor="@color/text_secondary"
+        android:textSize="12.5sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvColorPalette"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:overScrollMode="never" />
+
+    <!-- Custom Hex input row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_search_bar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
+
+        <View
+            android:id="@+id/viewHexPreview"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@drawable/bg_status_badge"
+            android:backgroundTint="@color/outline_variant" />
+
+        <EditText
+            android:id="@+id/etHexColor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="#RRGGBB"
+            android:importantForAutofill="no"
+            android:inputType="textCapCharacters"
+            android:maxLength="7"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_hint"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/btnApplyHex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:text="Áp dụng"
+            android:textColor="@color/primary_navy"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCancelColor"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/bg_btn_cancel"
+        android:stateListAnimator="@null"
+        android:text="@android:string/cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/btn_cancel_text"
+        android:textSize="13.5sp"
+        android:textStyle="bold" />
+</LinearLayout>
+

@@ -36,11 +36,20 @@ class BookRepository(context: Context) {
 
     fun delete(bookId: Long): Int {
         val db = dbHelper.writableDatabase
-        return db.delete(
+        val rows = db.delete(
             DatabaseHelper.TABLE_BOOKS,
             "${DatabaseHelper.COL_BOOK_ID} = ?",
             arrayOf(bookId.toString())
         )
+        if (rows > 0) {
+            // Delete any collection that has 0 books remaining
+            db.delete(
+                DatabaseHelper.TABLE_COLLECTIONS,
+                "${DatabaseHelper.COL_COLLECTION_ID} NOT IN (SELECT DISTINCT ${DatabaseHelper.COL_CB_COLLECTION_ID} FROM ${DatabaseHelper.TABLE_COLLECTION_BOOKS})",
+                null
+            )
+        }
+        return rows
     }
 
     fun getById(bookId: Long): Book? {

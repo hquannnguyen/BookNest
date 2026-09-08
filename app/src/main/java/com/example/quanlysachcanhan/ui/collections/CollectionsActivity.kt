@@ -43,8 +43,12 @@ class CollectionsActivity : AppCompatActivity() {
         bookRepository = BookRepository(this)
         preferenceManager = PreferenceManager(this)
 
-        // Seed sample collections if empty so the screen looks vibrant on first launch
-        collectionRepository.seedSampleCollectionsIfEmpty(bookRepository.getAll())
+        // Seed sample collections if empty and never seeded, and there are books
+        val allBooks = bookRepository.getAll()
+        if (!preferenceManager.hasSeededCollections && allBooks.isNotEmpty()) {
+            collectionRepository.seedSampleCollectionsIfEmpty(allBooks)
+            preferenceManager.hasSeededCollections = true
+        }
 
         setupTopHeader()
         setupBottomNavigation()
@@ -145,9 +149,9 @@ class CollectionsActivity : AppCompatActivity() {
     }
 
     private fun setupActions() {
-        binding.btnOverviewCreate.setOnClickListener {
-            openCreateOrEditDialog(0L)
-        }
+//        binding.btnOverviewCreate.setOnClickListener {
+//            openCreateOrEditDialog(0L)
+//        }
 
         binding.cardAddCollectionDashed.setOnClickListener {
             openCreateOrEditDialog(0L)
@@ -171,9 +175,15 @@ class CollectionsActivity : AppCompatActivity() {
 
         // 1. Overview card stats
         val overview = collectionRepository.getOverviewStats()
-        binding.tvOverviewTitle.text = "${overview.totalCollections} Bộ sưu tập • ${overview.totalBooksInCollections} Sách"
-        binding.tvOverviewSub.text = "${overview.readBooksInCollections}/${overview.totalBooksInCollections} cuốn đã hoàn thành (${overview.percent}%)"
-        binding.progressBarOverview.progress = overview.percent
+        if (allCollections.isEmpty()) {
+            binding.tvOverviewTitle.text = "Hãy tạo bộ sưu tập của riêng bạn"
+            binding.tvOverviewSub.text = "Gom nhóm những cuốn sách bạn yêu thích theo chủ đề"
+            binding.progressBarOverview.progress = 0
+        } else {
+            binding.tvOverviewTitle.text = "${overview.totalCollections} Bộ sưu tập • ${overview.totalBooksInCollections} Sách"
+            binding.tvOverviewSub.text = "${overview.readBooksInCollections}/${overview.totalBooksInCollections} cuốn đã hoàn thành (${overview.percent}%)"
+            binding.progressBarOverview.progress = overview.percent
+        }
 
         // 2. Filter chip counters
         val readingCount = allCollections.count { it.readingBooks > 0 }
