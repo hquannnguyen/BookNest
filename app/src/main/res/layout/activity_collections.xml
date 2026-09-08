@@ -192,7 +192,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="serif"
-                                    android:text="0 Bộ sưu tập • 0 Sách"
+                                    android:text="Hãy tạo bộ sưu tập của riêng bạn"
                                     android:textColor="@color/primary_navy"
                                     android:textSize="15.5sp"
                                     android:textStyle="bold" />
@@ -202,24 +202,24 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="2dp"
-                                    android:text="0/0 cuốn đã hoàn thành (0%)"
+                                    android:text="Gom nhóm những cuốn sách bạn yêu thích theo chủ đề"
                                     android:textColor="@color/text_secondary"
                                     android:textSize="12sp" />
                             </LinearLayout>
 
-                            <Button
-                                android:id="@+id/btnOverviewCreate"
-                                style="?android:attr/borderlessButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="36dp"
-                                android:background="@drawable/bg_btn_primary"
-                                android:drawableStart="@drawable/ic_add"
-                                android:drawableTint="@color/surface_card"
-                                android:paddingHorizontal="12dp"
-                                android:text="Tạo mới"
-                                android:textColor="@color/surface_card"
-                                android:textSize="11.5sp"
-                                android:textStyle="bold" />
+<!--                            <Button-->
+<!--                                android:id="@+id/btnOverviewCreate"-->
+<!--                                style="?android:attr/borderlessButtonStyle"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="36dp"-->
+<!--                                android:background="@drawable/bg_btn_primary"-->
+<!--                                android:drawableStart="@drawable/ic_add"-->
+<!--                                android:drawableTint="@color/surface_card"-->
+<!--                                android:paddingHorizontal="12dp"-->
+<!--                                android:text="Tạo mới"-->
+<!--                                android:textColor="@color/surface_card"-->
+<!--                                android:textSize="11.5sp"-->
+<!--                                android:textStyle="bold" />-->
                         </LinearLayout>
 
                         <!-- Overall Progress Bar -->
@@ -236,17 +236,18 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Quick Filter Pills (Horizontal Scroll) -->
+                <!-- Quick Filter Pills (Centered) -->
                 <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
+                    android:fillViewport="true"
                     android:scrollbars="none">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <TextView
@@ -424,7 +425,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="Tủ sách"
+                android:text="@string/nav_library"
                 android:textColor="@color/text_secondary"
                 android:textSize="11sp" />
         </LinearLayout>

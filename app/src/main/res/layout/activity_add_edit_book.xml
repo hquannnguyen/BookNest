@@ -837,7 +837,7 @@
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:importantForAccessibility="no"
-                android:src="@drawable/ic_auto_stories"
+                android:src="@drawable/ic_book_open"
                 app:tint="@color/secondary_oak" />
 
             <TextView

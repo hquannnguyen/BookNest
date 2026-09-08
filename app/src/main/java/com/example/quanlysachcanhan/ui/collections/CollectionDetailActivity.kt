@@ -222,14 +222,7 @@ class CollectionDetailActivity : AppCompatActivity() {
 
     private fun bindHeroCard(col: BookCollection, stats: CollectionWithStats?) {
         // Icon & Colors
-        val iconRes = when (col.iconName) {
-            "psychology" -> R.drawable.ic_psychology
-            "trending_up" -> R.drawable.ic_trending_up
-            "account_balance" -> R.drawable.ic_account_balance
-            "favorite" -> R.drawable.ic_favorite
-            "science" -> R.drawable.ic_science
-            else -> R.drawable.ic_auto_stories
-        }
+        val iconRes = com.example.quanlysachcanhan.utils.CollectionIconHelper.getIconResource(col.iconName)
         binding.ivCollectionIcon.setImageResource(iconRes)
 
         try {
@@ -446,8 +439,14 @@ class CollectionDetailActivity : AppCompatActivity() {
             .setPositiveButton("Bỏ sách") { _, _ ->
                 val success = collectionRepository.removeBookFromCollection(collectionId, book.id)
                 if (success) {
-                    Toast.makeText(this, "Đã bỏ \"${book.title}\" khỏi bộ sưu tập", Toast.LENGTH_SHORT).show()
-                    loadCollectionDetails()
+                    val remaining = collectionRepository.getById(collectionId)
+                    if (remaining == null) {
+                        Toast.makeText(this, "Bộ sưu tập đã bị xóa do không còn cuốn sách nào", Toast.LENGTH_LONG).show()
+                        NavigationHelper.finishWithSlide(this)
+                    } else {
+                        Toast.makeText(this, "Đã bỏ \"${book.title}\" khỏi bộ sưu tập", Toast.LENGTH_SHORT).show()
+                        loadCollectionDetails()
+                    }
                 } else {
                     Toast.makeText(this, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show()
                 }
