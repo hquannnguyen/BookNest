@@ -1,40 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary & Accent Colors -->
-    <color name="btn_primary">#2563EB</color>
-    <color name="btn_primary_pressed">#1D4ED8</color>
-    <color name="primary_navy">#2563EB</color>
-    <color name="primary_navy_dark">#1E40AF</color>
-    <color name="secondary_oak">#D97706</color>
-    <color name="secondary_oak_dark">#92400E</color>
+    <!-- Primary & Accent Colors (Literary Sanctuary Theme) -->
+    <color name="btn_primary">#031632</color>
+    <color name="btn_primary_pressed">#1A2B48</color>
+    <color name="primary_navy">#031632</color>
+    <color name="primary_navy_dark">#020F23</color>
+    <color name="primary_container">#1A2B48</color>
+    <color name="on_primary_container">#8293B5</color>
+    <color name="primary_fixed">#D7E2FF</color>
 
-    <!-- Surfaces & Backgrounds (Light Tone) -->
-    <color name="bg_page">#F8FAFC</color>
+    <!-- Secondary & Warm Oak Colors -->
+    <color name="secondary_oak">#7D562D</color>
+    <color name="secondary_oak_dark">#623F18</color>
+    <color name="secondary_container">#FFCA98</color>
+    <color name="on_secondary_container">#7A532A</color>
+    <color name="secondary_fixed">#FFDCBD</color>
+
+    <!-- Surfaces & Backgrounds (Light Tone - Literary Warmth) -->
+    <color name="bg_page">#FBF9F8</color>
     <color name="surface_card">#FFFFFF</color>
-    <color name="surface_container">#F1F5F9</color>
-    <color name="surface_container_high">#E2E8F0</color>
+    <color name="surface_container">#EFEDED</color>
+    <color name="surface_container_high">#EAE8E7</color>
+    <color name="surface_container_low">#F5F3F3</color>
+    <color name="surface_container_lowest">#FFFFFF</color>
 
     <!-- Typography -->
-    <color name="text_primary">#0F172A</color>
-    <color name="text_secondary">#64748B</color>
-    <color name="text_hint">#94A3B8</color>
-    <color name="border_color">#E2E8F0</color>
+    <color name="text_primary">#1B1C1C</color>
+    <color name="text_secondary">#44474D</color>
+    <color name="text_hint">#75777E</color>
+    <color name="border_color">#EAE8E7</color>
+    <color name="outline_variant">#C5C6CE</color>
 
-    <!-- Ratings -->
-    <color name="star_gold">#F59E0B</color>
+    <!-- Ratings & Accents -->
+    <color name="star_gold">#D4A373</color>
+    <color name="star_gold_bg">#EFEDED</color>
 
     <!-- Status Badges -->
-    <color name="status_reading_bg">#DBEAFE</color>
-    <color name="status_reading_text">#1D4ED8</color>
-    <color name="status_read_bg">#DCFCE7</color>
-    <color name="status_read_text">#15803D</color>
-    <color name="status_unread_bg">#F1F5F9</color>
-    <color name="status_unread_text">#475569</color>
+    <color name="status_reading_bg">#FFCA98</color>
+    <color name="status_reading_text">#7A532A</color>
+    <color name="status_read_bg">#7D562D</color>
+    <color name="status_read_text">#FFFFFF</color>
+    <color name="status_unread_bg">#E4E2E2</color>
+    <color name="status_unread_text">#44474D</color>
 
     <!-- Danger & Dialogs -->
-    <color name="danger">#EF4444</color>
-    <color name="danger_light">#FEE2E2</color>
+    <color name="danger">#BA1A1A</color>
+    <color name="danger_light">#FFDAD6</color>
     <color name="dialog_bg">#FFFFFF</color>
-    <color name="btn_cancel_bg">#F1F5F9</color>
+    <color name="btn_cancel_bg">#EFEDED</color>
     <color name="btn_cancel_text">#334155</color>
 </resources>

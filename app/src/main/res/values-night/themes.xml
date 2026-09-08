@@ -2,5 +2,6 @@
     <style name="Theme.QuanLySachCaNhan" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor">@color/surface_card</item>
+        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
     </style>
 </resources>

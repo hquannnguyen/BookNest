@@ -1,38 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary & Accent Colors -->
-    <color name="btn_primary">#2563EB</color>
-    <color name="btn_primary_pressed">#1D4ED8</color>
-    <color name="primary_navy">#60A5FA</color>
-    <color name="primary_navy_dark">#1E40AF</color>
+    <!-- Primary & Accent Colors (Literary Sanctuary Theme - Dark Mode) -->
+    <color name="btn_primary">#D7E2FF</color>
+    <color name="btn_primary_pressed">#B6C7EB</color>
+    <color name="primary_navy">#D7E2FF</color>
+    <color name="primary_navy_dark">#B6C7EB</color>
+    <color name="primary_container">#1A2B48</color>
+    <color name="on_primary_container">#D7E2FF</color>
+    <color name="primary_fixed">#D7E2FF</color>
+
+    <!-- Secondary & Warm Oak Colors -->
     <color name="secondary_oak">#E2B17A</color>
     <color name="secondary_oak_dark">#935E26</color>
+    <color name="secondary_container">#513515</color>
+    <color name="on_secondary_container">#FFDCBD</color>
+    <color name="secondary_fixed">#FFDCBD</color>
 
-    <!-- Surfaces & Backgrounds (Dark Tone) -->
+    <!-- Surfaces & Backgrounds (Dark Tone - Deep Charcoal Slate) -->
     <color name="bg_page">#0F172A</color>
     <color name="surface_card">#1E293B</color>
     <color name="surface_container">#162032</color>
     <color name="surface_container_high">#334155</color>
+    <color name="surface_container_low">#121A2A</color>
+    <color name="surface_container_lowest">#0A0F1D</color>
 
     <!-- Typography -->
     <color name="text_primary">#F8FAFC</color>
     <color name="text_secondary">#94A3B8</color>
     <color name="text_hint">#64748B</color>
     <color name="border_color">#334155</color>
+    <color name="outline_variant">#475569</color>
 
-    <!-- Ratings -->
-    <color name="star_gold">#F59E0B</color>
+    <!-- Ratings & Accents -->
+    <color name="star_gold">#E2B17A</color>
+    <color name="star_gold_bg">#334155</color>
 
     <!-- Status Badges -->
-    <color name="status_reading_bg">#1E3A8A</color>
-    <color name="status_reading_text">#93C5FD</color>
-    <color name="status_read_bg">#064E3B</color>
-    <color name="status_read_text">#6EE7B7</color>
+    <color name="status_reading_bg">#513515</color>
+    <color name="status_reading_text">#FFDCBD</color>
+    <color name="status_read_bg">#7D562D</color>
+    <color name="status_read_text">#FFFFFF</color>
     <color name="status_unread_bg">#334155</color>
     <color name="status_unread_text">#CBD5E1</color>
 
     <!-- Danger & Dialogs -->
-    <color name="danger">#EF4444</color>
+    <color name="danger">#FF5449</color>
     <color name="danger_light">#3B1824</color>
     <color name="dialog_bg">#1E293B</color>
     <color name="btn_cancel_bg">#334155</color>

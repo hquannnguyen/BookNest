@@ -5,20 +5,28 @@
 
     <!-- MainActivity -->
     <string name="title_library">BookNest</string>
-    <string name="hint_search">Tìm theo tên sách hoặc tác giả</string>
+    <string name="hint_search">Tìm tựa sách, tác giả, thể loại...</string>
     <string name="btn_filter">Lọc</string>
     <string name="btn_sort">Sắp xếp</string>
     <string name="btn_statistics">Thống kê</string>
     <string name="btn_language">Đổi ngôn ngữ</string>
     <string name="btn_reading_reminder">Thông báo</string>
     <string name="dialog_language_title">Chọn ngôn ngữ</string>
-    <string name="label_empty_books">Chưa có sách nào. Nhấn + để thêm!</string>
+    <string name="label_empty_books">Chưa có sách nào trong tủ sách.\nNhấn + để thêm sách mới!</string>
     <string name="fab_add_book">Thêm sách</string>
     <string name="status_all">Tất cả</string>
+    <string name="status_favorite">Yêu thích</string>
     <string name="nav_library">BookNest</string>
+    <string name="nav_collections">Bộ sưu tập</string>
     <string name="nav_search">Tìm kiếm</string>
     <string name="nav_statistics">Thống kê</string>
     <string name="nav_settings">Cài đặt</string>
+
+    <!-- Daily Quote Banner -->
+    <string name="banner_quote_title">HÔM NAY ĐỌC GÌ?</string>
+    <string name="banner_quote_time">Gợi ý hôm nay</string>
+    <string name="banner_quote_default">“Khi bạn thực sự mong muốn một điều gì, cả vũ trụ sẽ hợp sức giúp bạn đạt được.”</string>
+    <string name="offline_status_hint">Dữ liệu lưu an toàn trên máy (Ngoại tuyến)</string>
 
     <!-- Settings Menu -->
     <string name="title_settings_menu">Cài đặt</string>
@@ -52,26 +60,74 @@
     <string name="msg_theme_applied">Đã áp dụng giao diện mới</string>
 
     <!-- AddEditBookActivity -->
-    <string name="hint_title">Tên sách</string>
-    <string name="hint_author">Tác giả</string>
-    <string name="hint_note">Ghi chú cá nhân</string>
+    <string name="hint_title">Nhập tựa đề tác phẩm...</string>
+    <string name="hint_author">Tên tác giả, người dịch...</string>
+    <string name="hint_note">Ghi lại cảm nghĩ hoặc tóm tắt ý chính của cuốn sách...</string>
+    <string name="label_title_header">TÊN SÁCH *</string>
+    <string name="label_author_header">TÁC GIẢ *</string>
+    <string name="label_add_cover">Thêm bìa sách</string>
+    <string name="label_cover_ratio_hint">Khuyên dùng tỉ lệ 2:3</string>
+    <string name="label_optional">Tùy chọn</string>
+    <string name="label_your_rating">ĐÁNH GIÁ CỦA BẠN</string>
+    <string name="label_notes_header">GHI CHÚ &amp; TÓM TẮT CÁ NHÂN</string>
+    <string name="rating_unrated">Chưa chấm điểm</string>
+    <string name="rating_1">1.0 - Không thích</string>
+    <string name="rating_2">2.0 - Tạm được</string>
+    <string name="rating_3">3.0 - Khá ổn</string>
+    <string name="rating_4">4.0 - Rất hay</string>
+    <string name="rating_5">5.0 - Kiệt tác tâm đắc</string>
+
+    <!-- Pages & Quotes in Add/Edit Book -->
+    <string name="label_current_page">TRANG ĐANG ĐỌC</string>
+    <string name="hint_current_page">Vd: 84</string>
+    <string name="label_total_pages">TỔNG SỐ TRANG</string>
+    <string name="hint_total_pages">Vd: 120</string>
+    <string name="label_favorite_quotes">TRÍCH DẪN TÂM ĐẮC</string>
+    <string name="btn_add_new_quote">+ Thêm trích dẫn mới</string>
+    <string name="label_quote_count_format">%1$d trích dẫn</string>
+    <string name="label_quote_item_title">Trích dẫn #%1$d</string>
+    <string name="hint_quote_page">Trang (VD: Trang 64)</string>
+    <string name="hint_quote_chapter">Chương (VD: Chương VII)</string>
+    <string name="hint_quote_tag">Chủ đề / Cảm xúc (VD: Trách nhiệm &amp; tình yêu)</string>
+
     <string name="btn_choose_cover">Chọn ảnh bìa</string>
     <string name="btn_save">Lưu sách</string>
-    <string name="title_add_book">Thêm sách mới</string>
-    <string name="title_edit_book">Chỉnh sửa sách</string>
+    <string name="title_add_book">Thêm Sách Mới</string>
+    <string name="title_edit_book">Chỉnh Sửa Sách</string>
     <string name="error_title_empty">Vui lòng nhập tên sách</string>
     <string name="error_author_empty">Vui lòng nhập tác giả</string>
-    <string name="msg_book_added">Đã thêm sách</string>
-    <string name="msg_book_updated">Đã cập nhật sách</string>
-    <string name="label_category">Thể loại</string>
-    <string name="label_status">Trạng thái đọc</string>
+    <string name="msg_book_added">Đã thêm sách thành công</string>
+    <string name="msg_book_updated">Đã cập nhật sách thành công</string>
+    <string name="label_category">THỂ LOẠI</string>
+    <string name="label_status">TRẠNG THÁI ĐỌC</string>
     <string name="label_rating">Đánh giá ban đầu</string>
 
     <!-- BookDetailActivity -->
-    <string name="btn_edit">Sửa</string>
+    <string name="title_book_detail">Chi tiết sách</string>
+    <string name="btn_edit">Chỉnh sửa</string>
     <string name="btn_share">Chia sẻ</string>
-    <string name="btn_delete">Xóa</string>
-    <string name="btn_add_quote">+ Thêm trích dẫn</string>
+    <string name="btn_delete">Xóa sách</string>
+    <string name="btn_add_quote">+ Thêm trích dẫn tâm đắc</string>
+    <string name="btn_edit_note">Sửa ghi chú</string>
+    <string name="btn_share_quote">Chia sẻ câu này</string>
+    <string name="btn_save_quote">Lưu trích dẫn</string>
+    <string name="label_personal_progress">TIẾN ĐỘ CÁ NHÂN</string>
+    <string name="label_progress_detail_format">Trang %1$d / %2$d (%3$d%%)</string>
+    <string name="label_quotes_tab">Trích dẫn (%1$d)</string>
+    <string name="label_notes_tab">Ghi chú cá nhân</string>
+    <string name="label_notes_reflections">Ghi chú &amp; Suy ngẫm</string>
+    <string name="label_publishing_info">Thông tin xuất bản &amp; Bản quyền</string>
+    <string name="label_publisher_title">Nhà xuất bản:</string>
+    <string name="label_publisher_value">NXB Văn Học</string>
+    <string name="label_format_title">Định dạng đọc:</string>
+    <string name="label_format_value">Bìa cứng (Hardcover)</string>
+    <string name="label_storage_title">Bộ nhớ dữ liệu:</string>
+    <string name="label_storage_value">Offline SQLite lưu trữ</string>
+    <string name="label_privacy_banner_title">Không gian đọc riêng tư</string>
+    <string name="label_privacy_banner_subtitle">Toàn bộ trích dẫn &amp; ghi chú được mã hóa trên thiết bị</string>
+    <string name="empty_notes_hint">Chưa có ghi chú nào cho cuốn sách này. Hãy nhấn Sửa ghi chú để viết suy ngẫm của bạn.</string>
+    <string name="empty_quotes_hint">Chưa có trích dẫn tâm đắc nào. Nhấn nút bên trên để thêm trích dẫn bạn yêu thích.</string>
+    <string name="share_quote_format">“%1$s”\n\n— Trích từ: %2$s (%3$s)</string>
     <string name="content_description_cover">Ảnh bìa</string>
     <string name="content_description_delete_quote">Xóa trích dẫn</string>
     <string name="dialog_delete_title">Xác nhận xóa</string>
@@ -84,7 +140,7 @@
     <string name="dialog_add_quote_title">Thêm trích dẫn</string>
     <string name="dialog_edit_quote_title">Sửa trích dẫn</string>
     <string name="dialog_delete_quote_message">Xóa trích dẫn này?</string>
-    <string name="hint_quote_content">Nội dung trích dẫn...</string>
+    <string name="hint_quote_content">Nhập câu trích dẫn tâm đắc...</string>
     <string name="msg_quote_added">Đã thêm trích dẫn</string>
     <string name="msg_quote_deleted">Đã xóa trích dẫn</string>
 
@@ -97,12 +153,12 @@
     <string name="label_read_in_year">Sách đã đọc trong năm %1$d</string>
 
     <!-- Filter / Sort Dialog -->
-    <string name="dialog_filter_title">Lọc sách</string>
+    <string name="dialog_filter_title">Lọc theo thể loại</string>
     <string name="dialog_sort_title">Sắp xếp theo</string>
     <string name="filter_all">Tất cả</string>
     <string name="sort_title">Tên sách</string>
     <string name="sort_author">Tác giả</string>
-    <string name="sort_rating">Đánh giá</string>
+    <string name="sort_rating">Đánh giá cao</string>
     <string name="sort_status">Trạng thái</string>
 
     <!-- ReadingStatus labels -->
@@ -116,7 +172,7 @@
     <string name="category_economics">Kinh tế</string>
     <string name="category_children">Thiếu nhi</string>
     <string name="category_life_skills">Kỹ năng sống</string>
-    <string name="category_it">Công nghệ thông tin</string>
+    <string name="category_it">Công nghệ</string>
     <string name="category_psychology">Tâm lý học</string>
     <string name="category_history">Lịch sử</string>
     <string name="category_other">Khác</string>
@@ -125,10 +181,43 @@
     <string name="share_chooser_title">Chia sẻ sách</string>
     <string name="share_book_format">&#x1F4D6; %1$s\n&#x270D;&#xFE0F; %2$s\n&#x2B50; %3$.1f/5\n%4$s</string>
 
-    <!-- Settings -->
+    <!-- Settings Screen (Stitch Literary Sanctuary) -->
     <string name="title_settings">Cài đặt</string>
     <string name="pref_dark_mode">Chế độ tối</string>
     <string name="pref_language">Ngôn ngữ</string>
     <string name="lang_vietnamese">Tiếng Việt</string>
     <string name="lang_english">English</string>
+    <string name="section_look_feel">Giao diện &amp; Cảm nhận</string>
+    <string name="section_reading_reminder">Nhắc nhở đọc sách</string>
+    <string name="section_default_sort">Sắp xếp mặc định</string>
+    <string name="section_data">Dữ liệu</string>
+    <string name="section_about">Thông tin</string>
+    <string name="pref_dark_mode_title">Chế độ ban đêm</string>
+    <string name="pref_reminder_title">Nhắc nhở hàng ngày</string>
+    <string name="pref_reminder_time">Thời gian nhắc nhở</string>
+    <string name="reminder_daily_label">mỗi ngày</string>
+    <string name="pref_sync_title">Đồng bộ hóa</string>
+    <string name="pref_sync_desc">Lần cuối: Hôm nay (SQLite an toàn)</string>
+    <string name="pref_backup_title">Sao lưu dữ liệu</string>
+    <string name="pref_backup_desc">Xuất cơ sở dữ liệu sách</string>
+    <string name="pref_about_app">Giới thiệu BookNest</string>
+    <string name="pref_privacy_policy">Chính sách bảo mật</string>
+    <string name="btn_reset_settings">Đặt lại cài đặt / Xóa đệm</string>
+    <string name="app_version_format">BookNest • Phiên bản 2.4.1 (Build 402)</string>
+    <string name="dialog_edit_profile_title">Chỉnh sửa hồ sơ</string>
+    <string name="label_name">Tên độc giả</string>
+    <string name="label_email">Email / Châm ngôn</string>
+    <string name="msg_profile_updated">Đã cập nhật thông tin hồ sơ</string>
+    <string name="msg_sync_success">Dữ liệu SQLite ngoại tuyến đã được đồng bộ an toàn trên thiết bị</string>
+    <string name="msg_backup_success">Đã tạo bản sao lưu dữ liệu cục bộ thành công</string>
+    <string name="msg_reset_success">Đã khôi phục cài đặt mặc định</string>
+    <string name="dialog_reset_confirm">Bạn có chắc chắn muốn đặt lại tất cả tùy chọn về mặc định không?</string>
+    <string name="about_app_desc">BookNest - Ứng dụng quản lý tủ sách cá nhân theo phong cách Literary Sanctuary. Toàn bộ dữ liệu được mã hóa và lưu trữ ngoại tuyến trên thiết bị của bạn.</string>
+    <string name="privacy_policy_desc">BookNest tôn trọng quyền riêng tư của bạn. Ứng dụng hoạt động 100% ngoại tuyến (Offline-First), không gửi dữ liệu sách, ghi chú hoặc trích dẫn của bạn lên bất kỳ máy chủ nào.</string>
+    <string name="dialog_avatar_options_title">Ảnh đại diện độc giả</string>
+    <string name="btn_choose_new_avatar">Chọn ảnh từ thư viện</string>
+    <string name="btn_remove_avatar">Sử dụng biểu tượng mặc định</string>
+    <string name="msg_avatar_updated">Đã cập nhật ảnh đại diện</string>
+    <string name="msg_avatar_removed">Đã khôi phục ảnh đại diện mặc định</string>
+    <string name="btn_cancel">Hủy</string>
 </resources>
