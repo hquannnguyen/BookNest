@@ -9,6 +9,8 @@ data class Book(
     val note: String = "",
     val readingStatus: String,
     val coverImagePath: String? = null,
+    val currentPage: Int = 0,
+    val totalPages: Int = 0,
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long? = null,
     val finishedAt: Long? = null

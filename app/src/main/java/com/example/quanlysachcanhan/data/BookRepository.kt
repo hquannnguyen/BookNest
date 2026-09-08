@@ -63,6 +63,8 @@ class BookRepository(context: Context) {
         }
     }
 
+    fun getAll(): List<Book> = getBooks()
+
     /**
      * Query dùng chung cho danh sách:
      * - search theo title hoặc author
@@ -174,6 +176,26 @@ class BookRepository(context: Context) {
         )
     }
 
+    fun getCategoryCounts(): Map<String, Int> {
+        val db = dbHelper.readableDatabase
+        val result = mutableMapOf<String, Int>()
+        db.rawQuery(
+            "SELECT ${DatabaseHelper.COL_BOOK_CATEGORY}, COUNT(*) AS total FROM ${DatabaseHelper.TABLE_BOOKS} GROUP BY ${DatabaseHelper.COL_BOOK_CATEGORY} ORDER BY total DESC",
+            null
+        ).use { cursor ->
+            val catIndex = cursor.getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_CATEGORY)
+            val totalIndex = cursor.getColumnIndexOrThrow("total")
+            while (cursor.moveToNext()) {
+                val cat = cursor.getString(catIndex)
+                val total = cursor.getInt(totalIndex)
+                if (!cat.isNullOrBlank()) {
+                    result[cat] = total
+                }
+            }
+        }
+        return result
+    }
+
     private fun countByWhere(
         selection: String?,
         args: Array<String>?
@@ -205,6 +227,8 @@ class BookRepository(context: Context) {
         put(DatabaseHelper.COL_BOOK_NOTE, note)
         put(DatabaseHelper.COL_BOOK_STATUS, readingStatus)
         put(DatabaseHelper.COL_BOOK_COVER, coverImagePath)
+        put(DatabaseHelper.COL_BOOK_CURRENT_PAGE, currentPage)
+        put(DatabaseHelper.COL_BOOK_TOTAL_PAGES, totalPages)
         put(DatabaseHelper.COL_BOOK_CREATED_AT, createdAt)
 
         if (updatedAt != null) {
@@ -220,24 +244,28 @@ class BookRepository(context: Context) {
         }
     }
 
-    private fun android.database.Cursor.toBook(): Book {
-        val updatedIndex =
-            getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_UPDATED_AT)
-        val finishedIndex =
-            getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_FINISHED_AT)
+    companion object {
+        fun android.database.Cursor.toBook(): Book {
+            val updatedIndex = getColumnIndex(DatabaseHelper.COL_BOOK_UPDATED_AT)
+            val finishedIndex = getColumnIndex(DatabaseHelper.COL_BOOK_FINISHED_AT)
+            val curPageIndex = getColumnIndex(DatabaseHelper.COL_BOOK_CURRENT_PAGE)
+            val totalPagesIndex = getColumnIndex(DatabaseHelper.COL_BOOK_TOTAL_PAGES)
 
-        return Book(
-            id = getLong(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_ID)),
-            title = getString(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_TITLE)),
-            author = getString(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_AUTHOR)),
-            category = getString(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_CATEGORY)),
-            rating = getFloat(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_RATING)),
-            note = getString(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_NOTE)),
-            readingStatus = getString(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_STATUS)),
-            coverImagePath = getString(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_COVER)),
-            createdAt = getLong(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_CREATED_AT)),
-            updatedAt = if (isNull(updatedIndex)) null else getLong(updatedIndex),
-            finishedAt = if (isNull(finishedIndex)) null else getLong(finishedIndex)
-        )
+            return Book(
+                id = getLong(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_ID)),
+                title = getString(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_TITLE)),
+                author = getString(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_AUTHOR)),
+                category = getString(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_CATEGORY)),
+                rating = getFloat(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_RATING)),
+                note = getString(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_NOTE)),
+                readingStatus = getString(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_STATUS)),
+                coverImagePath = getString(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_COVER)),
+                currentPage = if (curPageIndex >= 0 && !isNull(curPageIndex)) getInt(curPageIndex) else 0,
+                totalPages = if (totalPagesIndex >= 0 && !isNull(totalPagesIndex)) getInt(totalPagesIndex) else 0,
+                createdAt = getLong(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_CREATED_AT)),
+                updatedAt = if (updatedIndex >= 0 && !isNull(updatedIndex)) getLong(updatedIndex) else null,
+                finishedAt = if (finishedIndex >= 0 && !isNull(finishedIndex)) getLong(finishedIndex) else null
+            )
+        }
     }
 }

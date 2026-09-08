@@ -11,11 +11,25 @@
         android:theme="@style/Theme.QuanLySachCaNhan">
 
         <activity
+            android:name=".ui.collections.CollectionsActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.collections.CollectionDetailActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
+
+        <activity
             android:name=".ui.stats.StatisticsActivity"
             android:exported="false" />
 
         <activity
             android:name=".ui.detail.BookDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.settings.SettingsActivity"
             android:exported="false" />
 
         <activity

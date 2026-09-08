@@ -33,6 +33,34 @@ class PreferenceManager(context: Context) {
         get() = prefs.getInt(KEY_REMINDER_MINUTE, 0)
         set(value) { prefs.edit().putInt(KEY_REMINDER_MINUTE, value).apply() }
 
+    var userName: String
+        get() = prefs.getString(KEY_USER_NAME, "Người yêu sách") ?: "Người yêu sách"
+        set(value) { prefs.edit().putString(KEY_USER_NAME, value).apply() }
+
+    var userEmail: String
+        get() = prefs.getString(KEY_USER_EMAIL, "booklover@library.com") ?: "booklover@library.com"
+        set(value) { prefs.edit().putString(KEY_USER_EMAIL, value).apply() }
+
+    var userAvatarPath: String?
+        get() = prefs.getString(KEY_USER_AVATAR, null)
+        set(value) { prefs.edit().putString(KEY_USER_AVATAR, value).apply() }
+
+    var lastSyncTime: Long
+        get() = prefs.getLong(KEY_LAST_SYNC, System.currentTimeMillis())
+        set(value) { prefs.edit().putLong(KEY_LAST_SYNC, value).apply() }
+
+    var bannerQuoteContent: String?
+        get() = prefs.getString(KEY_BANNER_QUOTE_CONTENT, null)
+        set(value) { prefs.edit().putString(KEY_BANNER_QUOTE_CONTENT, value).apply() }
+
+    var bannerQuoteBookTitle: String?
+        get() = prefs.getString(KEY_BANNER_QUOTE_TITLE, null)
+        set(value) { prefs.edit().putString(KEY_BANNER_QUOTE_TITLE, value).apply() }
+
+    var bannerQuoteTime: Long
+        get() = prefs.getLong(KEY_BANNER_QUOTE_TIME, 0L)
+        set(value) { prefs.edit().putLong(KEY_BANNER_QUOTE_TIME, value).apply() }
+
     // language: KHONG luu o day.
     // AppCompatDelegate.getApplicationLocales() la source of truth duy nhat.
     // Dung LocaleHelper.setLocale() / LocaleHelper.getCurrentLanguage() de doc/ghi.
@@ -44,5 +72,12 @@ class PreferenceManager(context: Context) {
         private const val KEY_REMINDER_ENABLED   = "reminder_enabled"
         private const val KEY_REMINDER_HOUR      = "reminder_hour"
         private const val KEY_REMINDER_MINUTE    = "reminder_minute"
+        private const val KEY_USER_NAME          = "user_name"
+        private const val KEY_USER_EMAIL         = "user_email"
+        private const val KEY_USER_AVATAR        = "user_avatar"
+        private const val KEY_LAST_SYNC          = "last_sync"
+        private const val KEY_BANNER_QUOTE_CONTENT = "banner_quote_content"
+        private const val KEY_BANNER_QUOTE_TITLE   = "banner_quote_title"
+        private const val KEY_BANNER_QUOTE_TIME    = "banner_quote_time"
     }
 }
