@@ -187,6 +187,7 @@ object NavigationHelper {
             } else {
                 val intent = Intent(activity, MainActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    putExtra(MainActivity.EXTRA_SELECTED_TAB, MainActivity.TAB_LIBRARY)
                 }
                 activity.startActivity(intent)
                 finishWithSlide(activity)
@@ -194,33 +195,30 @@ object NavigationHelper {
         }
 
         navCollections.setOnClickListener {
-            if (currentTab != Tab.COLLECTIONS) {
-                val intent = Intent(activity, CollectionsActivity::class.java)
-                startActivitySlide(activity, intent)
-                if (currentTab != Tab.LIBRARY) {
-                    activity.finish()
-                }
+            val intent = Intent(activity, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                putExtra(MainActivity.EXTRA_SELECTED_TAB, MainActivity.TAB_COLLECTIONS)
             }
+            activity.startActivity(intent)
+            finishWithSlide(activity)
         }
 
         navStatistics.setOnClickListener {
-            if (currentTab != Tab.STATISTICS) {
-                val intent = Intent(activity, StatisticsActivity::class.java)
-                startActivitySlide(activity, intent)
-                if (currentTab != Tab.LIBRARY) {
-                    activity.finish()
-                }
+            val intent = Intent(activity, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                putExtra(MainActivity.EXTRA_SELECTED_TAB, MainActivity.TAB_STATISTICS)
             }
+            activity.startActivity(intent)
+            finishWithSlide(activity)
         }
 
         navSettings.setOnClickListener {
-            if (currentTab != Tab.SETTINGS) {
-                val intent = Intent(activity, SettingsActivity::class.java)
-                startActivitySlide(activity, intent)
-                if (currentTab != Tab.LIBRARY) {
-                    activity.finish()
-                }
+            val intent = Intent(activity, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                putExtra(MainActivity.EXTRA_SELECTED_TAB, MainActivity.TAB_SETTINGS)
             }
+            activity.startActivity(intent)
+            finishWithSlide(activity)
         }
     }
 }
