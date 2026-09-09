@@ -8,7 +8,8 @@ import java.util.Calendar
 
 class BookRepository(context: Context) {
 
-    private val dbHelper = DatabaseHelper(context.applicationContext)
+    private val appContext = context.applicationContext
+    private val dbHelper = DatabaseHelper(appContext)
 
     fun insert(book: Book): Long {
         val db = dbHelper.writableDatabase
@@ -36,11 +37,15 @@ class BookRepository(context: Context) {
 
     fun delete(bookId: Long): Int {
         val db = dbHelper.writableDatabase
-        return db.delete(
+        val rows = db.delete(
             DatabaseHelper.TABLE_BOOKS,
             "${DatabaseHelper.COL_BOOK_ID} = ?",
             arrayOf(bookId.toString())
         )
+        if (rows > 0) {
+            CollectionRepository(appContext).cleanUpEmptyCollections()
+        }
+        return rows
     }
 
     fun getById(bookId: Long): Book? {

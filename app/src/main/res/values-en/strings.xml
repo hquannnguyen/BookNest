@@ -201,4 +201,115 @@
     <string name="msg_avatar_updated">Avatar updated</string>
     <string name="msg_avatar_removed">Default avatar restored</string>
     <string name="btn_cancel">Cancel</string>
+
+    <!-- Collections Screen -->
+    <string name="collections_overview_title">%1$d Collections • %2$d Books</string>
+    <string name="collections_overview_sub">%1$d/%2$d completed (%3$d%%)</string>
+    <string name="collections_overview_empty_title">Create your own collection</string>
+    <string name="collections_overview_empty_sub">Group and organize favorite titles to match your style</string>
+    <string name="collections_btn_create">Create</string>
+    <string name="collections_filter_all">All (%1$d)</string>
+    <string name="collections_filter_unread">Unread (%1$d)</string>
+    <string name="collections_filter_reading">In Progress (%1$d)</string>
+    <string name="collections_filter_completed">Completed (%1$d)</string>
+    <string name="collections_add_dashed">Add New Collection</string>
+    <string name="collections_empty_title">Create your own collection</string>
+    <string name="collections_empty_subtitle">Select at least 1 book to start your first collection</string>
+    <string name="collections_fab_desc">Create new collection</string>
+    <string name="collection_item_sub_format">%1$d books • %2$s</string>
+    <string name="collection_item_completed">Completed ✓</string>
+    <string name="collection_item_books_read">books read</string>
+    <string name="collection_item_label_progress">PROGRESS</string>
+    <string name="collection_item_reading_progress">Reading progress</string>
+    <string name="collection_menu_edit">Edit collection</string>
+    <string name="collection_menu_delete">Delete collection</string>
+    <string name="dialog_delete_collection_title">Delete Collection</string>
+    <string name="dialog_delete_collection_message">Are you sure you want to delete collection \"%1$s\"?\n(Books inside will remain in your library).</string>
+    <string name="msg_collection_deleted">Collection deleted</string>
+    <string name="msg_collection_deleted_empty">Collection was automatically deleted because it has no books</string>
+    <string name="time_just_now">Just updated</string>
+    <string name="time_hours_ago">%1$d hours ago</string>
+    <string name="time_yesterday">Yesterday</string>
+    <string name="time_days_ago">%1$d days ago</string>
+    <string name="time_weeks_ago">%1$d weeks ago</string>
+
+    <!-- Create / Edit Collection Dialog -->
+    <string name="dialog_create_collection_title">Create New Collection</string>
+    <string name="dialog_edit_collection_title">Edit Collection</string>
+    <string name="label_collection_name_header">COLLECTION NAME *</string>
+    <string name="hint_collection_name">e.g. Modern Philosophy &amp; Psychology</string>
+    <string name="label_collection_desc_header">DESCRIPTION (OPTIONAL)</string>
+    <string name="hint_collection_desc">Notes on reading purpose, thoughts or themes...</string>
+    <string name="label_collection_color_header">ICON COLOR</string>
+    <string name="label_collection_icon_header">REPRESENTATIVE ICON</string>
+    <string name="label_collection_books_header">ADD BOOKS TO COLLECTION *</string>
+    <string name="hint_search_in_library">Search books in library...</string>
+    <string name="hint_no_books_found">No matching books found.</string>
+    <string name="btn_create_collection">Create Collection</string>
+    <string name="btn_create_collection_with_count">Create Collection (%1$d books)</string>
+    <string name="btn_save_collection">Save Changes</string>
+    <string name="btn_save_collection_with_count">Save Changes (%1$d books)</string>
+    <string name="error_collection_name_empty">Please enter collection name</string>
+    <string name="error_collection_must_have_books">Please select at least 1 book to create a collection</string>
+    <string name="msg_collection_created">New collection created</string>
+    <string name="msg_collection_updated">Collection updated</string>
+    <string name="count_books_format">%1$d books</string>
+    <string name="collection_meta_prefix">Collection: %1$s</string>
+    <string name="collection_meta_untitled">Untitled</string>
+    <string name="btn_toggle_meta_details">Details ▼</string>
+    <string name="btn_close">Close</string>
+    <string name="picker_chip_all">All (%1$d)</string>
+    <string name="picker_chip_unread">Unread (%1$d)</string>
+    <string name="picker_chip_reading">Reading (%1$d)</string>
+    <string name="picker_chip_read">Read (%1$d)</string>
+
+    <!-- Extended Color & Icon Pickers -->
+    <string name="dialog_color_picker_title">Collection Color Palette</string>
+    <string name="dialog_color_picker_sub">Choose from 30+ colors or enter custom Hex</string>
+    <string name="dialog_icon_picker_title">Icon Library</string>
+    <string name="dialog_icon_picker_sub">Choose an icon matching your collection theme</string>
+    <string name="label_hex_code">HEX CODE (#RRGGBB)</string>
+    <string name="label_material_palette">QUICK SELECT PALETTE</string>
+    <string name="hint_hex_code">#7D562D</string>
+    <string name="btn_apply_color">Apply Color</string>
+    <string name="error_invalid_hex">Invalid Hex code (#RRGGBB or #AARRGGBB)</string>
+
+    <string name="dialog_remove_book_title">Remove Book from Collection</string>
+    <string name="dialog_remove_book_message">Are you sure you want to remove \"%1$s\" from this collection?</string>
+    <string name="dialog_remove_book_confirm">Remove</string>
+    <string name="msg_book_removed_from_collection">Removed \"%1$s\" from collection</string>
+
+    <!-- Statistics Screen -->
+    <string name="stats_status_offline_synced">OFFLINE DATA • SYNCHRONIZED</string>
+    <string name="stats_card_total_books">Total Books</string>
+    <string name="stats_card_total_sub">In Library</string>
+    <string name="stats_card_read">Read</string>
+    <string name="stats_card_read_sub">Completed</string>
+    <string name="stats_card_reading">Reading</string>
+    <string name="stats_card_reading_sub">Page progress</string>
+    <string name="stats_section_categories_title">Category Distribution</string>
+    <string name="stats_section_categories_sub">Personal reading tastes &amp; interests</string>
+    <string name="stats_donut_center_label">BOOKS</string>
+    <string name="stats_favorite_category_label">FAVORITE GENRE</string>
+    <string name="stats_favorite_category_updating">Updating</string>
+    <string name="stats_category_desc_empty">Your library is waiting for its first books.</string>
+    <string name="stats_category_desc_format">Accounts for %1$d%% of library, reflecting your reading preferences.</string>
+    <string name="stats_section_status_title">Reading Status</string>
+    <string name="stats_section_status_sub">Archive &amp; completion progress</string>
+    <string name="stats_status_completed">Completed</string>
+    <string name="stats_status_completed_desc">Successfully completed</string>
+    <string name="stats_status_completed_sub">%1$d books completed</string>
+    <string name="stats_status_reading">Currently reading</string>
+    <string name="stats_status_reading_desc">Tracking page progress</string>
+    <string name="stats_status_reading_sub">%1$d bedtime companions</string>
+    <string name="stats_status_unread">Unread (Reading queue)</string>
+    <string name="stats_status_unread_desc">Ready for a new journey</string>
+    <string name="stats_status_unread_sub">Waiting to explore</string>
+    <string name="stats_section_quotes_title">REFLECTIVE INSPIRATION</string>
+    <string name="stats_quote_default">“Every closed page begins a new world opening in the mind.”</string>
+    <string name="stats_quote_default_source">— Daily reading habit</string>
+    <string name="stats_quote_source_fallback">— Favorite quote</string>
+    <string name="stats_quote_source_page">Page %1$s</string>
+    <string name="stats_quote_total_count">Total: %1$d quotes saved</string>
+    <string name="stats_btn_view_library">View Library ➔</string>
 </resources>

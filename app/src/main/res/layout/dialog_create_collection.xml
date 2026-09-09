@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_dialog_card"
@@ -38,7 +39,7 @@
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:fontFamily="serif"
-            android:text="Tạo Bộ Sưu Tập Mới"
+            android:text="@string/dialog_create_collection_title"
             android:textColor="@color/primary_navy"
             android:textSize="17.5sp"
             android:textStyle="bold" />
@@ -48,7 +49,7 @@
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Đóng"
+            android:contentDescription="@string/btn_close"
             android:src="@drawable/ic_close"
             app:tint="@color/text_secondary" />
     </LinearLayout>
@@ -66,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:letterSpacing="0.04"
-            android:text="TÊN BỘ SƯU TẬP *"
+            android:text="@string/label_collection_name_header"
             android:textColor="@color/text_secondary"
             android:textSize="10.5sp"
             android:textStyle="bold" />
@@ -78,7 +79,7 @@
             android:layout_marginTop="3dp"
             android:background="@drawable/bg_input_field"
             android:fontFamily="serif"
-            android:hint="Ví dụ: Triết Học Hiện Đại &amp; Tâm Lý"
+            android:hint="@string/hint_collection_name"
             android:importantForAutofill="no"
             android:inputType="textCapSentences"
             android:maxLines="1"
@@ -93,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:letterSpacing="0.04"
-            android:text="MÔ TẢ (TÙY CHỌN)"
+            android:text="@string/label_collection_desc_header"
             android:textColor="@color/text_secondary"
             android:textSize="10.5sp"
             android:textStyle="bold" />
@@ -105,7 +106,7 @@
             android:layout_marginTop="3dp"
             android:background="@drawable/bg_input_field"
             android:gravity="center_vertical|start"
-            android:hint="Ghi chú mục đích, cảm xúc hoặc chủ đề đọc..."
+            android:hint="@string/hint_collection_desc"
             android:importantForAutofill="no"
             android:inputType="textCapSentences"
             android:maxLines="2"
@@ -120,131 +121,211 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:letterSpacing="0.04"
-            android:text="MÀU BIỂU TƯỢNG"
+            android:text="@string/label_collection_color_header"
             android:textColor="@color/text_secondary"
             android:textSize="10.5sp"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/layoutColors"
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:scrollbars="none">
 
-            <FrameLayout
-                android:id="@+id/colorNavy"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:background="@drawable/bg_status_badge"
-                android:backgroundTint="@color/primary_navy"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:id="@+id/checkNavy"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_check"
-                    app:tint="@color/surface_card" />
-            </FrameLayout>
+            <LinearLayout
+                android:id="@+id/layoutColors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="2dp">
 
-            <FrameLayout
-                android:id="@+id/colorOak"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_status_badge"
-                android:backgroundTint="@color/secondary_oak"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:id="@+id/checkOak"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_check"
-                    android:visibility="gone"
-                    app:tint="@color/surface_card" />
-            </FrameLayout>
+                <!-- 1. Navy -->
+                <FrameLayout
+                    android:id="@+id/colorNavy"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="@color/primary_navy"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkNavy"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/colorAmber"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_status_badge"
-                android:backgroundTint="@color/secondary_container"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:id="@+id/checkAmber"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_check"
-                    android:visibility="gone"
-                    app:tint="@color/primary_navy" />
-            </FrameLayout>
+                <!-- 2. Oak -->
+                <FrameLayout
+                    android:id="@+id/colorOak"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="@color/secondary_oak"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkOak"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/colorSlate"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_status_badge"
-                android:backgroundTint="#4E5F7E"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:id="@+id/checkSlate"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_check"
-                    android:visibility="gone"
-                    app:tint="@color/surface_card" />
-            </FrameLayout>
+                <!-- 3. Amber -->
+                <FrameLayout
+                    android:id="@+id/colorAmber"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="#B45309"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkAmber"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/colorGold"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_status_badge"
-                android:backgroundTint="@color/star_gold"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:id="@+id/checkGold"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_check"
-                    android:visibility="gone"
-                    app:tint="@color/surface_card" />
-            </FrameLayout>
+                <!-- 4. Wine Red -->
+                <FrameLayout
+                    android:id="@+id/colorWine"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="#991B1B"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkWine"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/colorDark"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg_status_badge"
-                android:backgroundTint="#2C1600"
-                android:clickable="true"
-                android:focusable="true">
-                <ImageView
-                    android:id="@+id/checkDark"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_check"
-                    android:visibility="gone"
-                    app:tint="@color/surface_card" />
-            </FrameLayout>
-        </LinearLayout>
+                <!-- 5. Emerald -->
+                <FrameLayout
+                    android:id="@+id/colorEmerald"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="#065F46"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkEmerald"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
+
+                <!-- 6. Cyan Blue -->
+                <FrameLayout
+                    android:id="@+id/colorCyan"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="#0284C7"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkCyan"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
+
+                <!-- 7. Purple -->
+                <FrameLayout
+                    android:id="@+id/colorPurple"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="#6B21A8"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkPurple"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
+
+                <!-- 8. Charcoal -->
+                <FrameLayout
+                    android:id="@+id/colorCharcoal"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_status_badge"
+                    android:backgroundTint="#1F2937"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/checkCharcoal"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
+
+                <!-- 9. More Colors Button (...) -->
+                <FrameLayout
+                    android:id="@+id/colorMore"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <ImageView
+                        android:id="@+id/ivColorMore"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_more_horiz"
+                        app:tint="@color/primary_navy" />
+                    <ImageView
+                        android:id="@+id/checkColorMore"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone"
+                        app:tint="@color/surface_card" />
+                </FrameLayout>
+
+            </LinearLayout>
+        </HorizontalScrollView>
 
         <!-- Icon Picker Grid -->
         <TextView
@@ -252,7 +333,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:letterSpacing="0.04"
-            android:text="BIỂU TƯỢNG ĐẠI DIỆN"
+            android:text="@string/label_collection_icon_header"
             android:textColor="@color/text_secondary"
             android:textSize="10.5sp"
             android:textStyle="bold" />
@@ -268,7 +349,7 @@
                 android:id="@+id/btnIconStories"
                 android:layout_width="0dp"
                 android:layout_height="34dp"
-                android:layout_marginEnd="3dp"
+                android:layout_marginEnd="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_chip_selected"
                 android:clickable="true"
@@ -286,7 +367,7 @@
                 android:id="@+id/btnIconPsychology"
                 android:layout_width="0dp"
                 android:layout_height="34dp"
-                android:layout_marginHorizontal="3dp"
+                android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_chip_unselected"
                 android:clickable="true"
@@ -304,7 +385,7 @@
                 android:id="@+id/btnIconTrending"
                 android:layout_width="0dp"
                 android:layout_height="34dp"
-                android:layout_marginHorizontal="3dp"
+                android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_chip_unselected"
                 android:clickable="true"
@@ -322,7 +403,7 @@
                 android:id="@+id/btnIconFinance"
                 android:layout_width="0dp"
                 android:layout_height="34dp"
-                android:layout_marginHorizontal="3dp"
+                android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_chip_unselected"
                 android:clickable="true"
@@ -340,7 +421,7 @@
                 android:id="@+id/btnIconFavorite"
                 android:layout_width="0dp"
                 android:layout_height="34dp"
-                android:layout_marginHorizontal="3dp"
+                android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_chip_unselected"
                 android:clickable="true"
@@ -358,7 +439,7 @@
                 android:id="@+id/btnIconScience"
                 android:layout_width="0dp"
                 android:layout_height="34dp"
-                android:layout_marginStart="3dp"
+                android:layout_marginHorizontal="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_chip_unselected"
                 android:clickable="true"
@@ -369,6 +450,25 @@
                     android:layout_height="18dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_science"
+                    app:tint="@color/primary_navy" />
+            </FrameLayout>
+
+            <!-- More Icons Button (...) -->
+            <FrameLayout
+                android:id="@+id/btnIconMore"
+                android:layout_width="0dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chip_unselected"
+                android:clickable="true"
+                android:focusable="true">
+                <ImageView
+                    android:id="@+id/ivIconMore"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_more_horiz"
                     app:tint="@color/primary_navy" />
             </FrameLayout>
         </LinearLayout>
@@ -394,10 +494,10 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Bộ sưu tập: Chưa đặt tên"
             android:textColor="@color/secondary_oak"
             android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="Bộ sưu tập: Chưa đặt tên" />
 
         <TextView
             android:id="@+id/btnToggleMeta"
@@ -408,7 +508,7 @@
             android:focusable="true"
             android:paddingHorizontal="8dp"
             android:paddingVertical="3dp"
-            android:text="Chi tiết ▼"
+            android:text="@string/btn_toggle_meta_details"
             android:textColor="@color/primary_navy"
             android:textSize="11.5sp"
             android:textStyle="bold" />
@@ -427,7 +527,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:letterSpacing="0.04"
-            android:text="THÊM SÁCH VÀO BỘ SƯU TẬP"
+            android:text="@string/label_collection_books_header"
             android:textColor="@color/text_secondary"
             android:textSize="10.5sp"
             android:textStyle="bold" />
@@ -439,10 +539,10 @@
             android:background="@drawable/bg_lang_badge"
             android:paddingHorizontal="8dp"
             android:paddingVertical="3dp"
-            android:text="0 cuốn"
             android:textColor="@color/secondary_oak"
             android:textSize="11sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="0 cuốn" />
     </LinearLayout>
 
     <!-- Search Bar in picker -->
@@ -468,7 +568,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="6dp"
             android:background="@null"
-            android:hint="Tìm kiếm sách trong thư viện..."
+            android:hint="@string/hint_search_in_library"
             android:importantForAutofill="no"
             android:inputType="text"
             android:maxLines="1"
@@ -499,7 +599,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:paddingHorizontal="12dp"
-                android:text="Tất cả (0)"
+                android:text="@string/filter_all"
                 android:textColor="@color/surface_card"
                 android:textSize="11.5sp"
                 android:textStyle="bold" />
@@ -514,7 +614,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:paddingHorizontal="12dp"
-                android:text="Chưa đọc (0)"
+                android:text="@string/status_unread"
                 android:textColor="@color/text_primary"
                 android:textSize="11.5sp" />
 
@@ -528,7 +628,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:paddingHorizontal="12dp"
-                android:text="Đang đọc (0)"
+                android:text="@string/status_reading"
                 android:textColor="@color/text_primary"
                 android:textSize="11.5sp" />
 
@@ -542,7 +642,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:paddingHorizontal="12dp"
-                android:text="Đã đọc (0)"
+                android:text="@string/status_read"
                 android:textColor="@color/text_primary"
                 android:textSize="11.5sp" />
 
@@ -571,7 +671,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Không tìm thấy sách phù hợp."
+            android:text="@string/hint_no_books_found"
             android:textColor="@color/text_hint"
             android:textSize="12sp"
             android:visibility="gone" />
@@ -603,7 +703,7 @@
             android:drawableTint="#FFFFFF"
             android:gravity="center"
             android:stateListAnimator="@null"
-            android:text="Tạo Bộ Sưu Tập"
+            android:text="@string/btn_create_collection"
             android:textColor="#FFFFFF"
             android:textSize="14.5sp"
             android:textStyle="bold" />

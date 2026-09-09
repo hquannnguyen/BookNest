@@ -220,4 +220,115 @@
     <string name="msg_avatar_updated">Đã cập nhật ảnh đại diện</string>
     <string name="msg_avatar_removed">Đã khôi phục ảnh đại diện mặc định</string>
     <string name="btn_cancel">Hủy</string>
+
+    <!-- Collections Screen -->
+    <string name="collections_overview_title">%1$d Bộ sưu tập • %2$d Sách</string>
+    <string name="collections_overview_sub">%1$d/%2$d cuốn đã hoàn thành (%3$d%%)</string>
+    <string name="collections_overview_empty_title">Hãy tạo bộ sưu tập của riêng bạn</string>
+    <string name="collections_overview_empty_sub">Gom nhóm và phân loại những tác phẩm tâm đắc theo phong cách của bạn</string>
+    <string name="collections_btn_create">Tạo mới</string>
+    <string name="collections_filter_all">Tất cả (%1$d)</string>
+    <string name="collections_filter_unread">Chưa đọc (%1$d)</string>
+    <string name="collections_filter_reading">Đang đọc dở (%1$d)</string>
+    <string name="collections_filter_completed">Đã xong (%1$d)</string>
+    <string name="collections_add_dashed">Thêm bộ sưu tập mới</string>
+    <string name="collections_empty_title">Hãy tạo bộ sưu tập của riêng bạn</string>
+    <string name="collections_empty_subtitle">Chọn ít nhất 1 cuốn sách để bắt đầu xây dựng bộ sưu tập đầu tiên</string>
+    <string name="collections_fab_desc">Tạo bộ sưu tập mới</string>
+    <string name="collection_item_sub_format">%1$d cuốn sách • %2$s</string>
+    <string name="collection_item_completed">Hoàn thành ✓</string>
+    <string name="collection_item_books_read">cuốn đã đọc</string>
+    <string name="collection_item_label_progress">TIẾN ĐỘ</string>
+    <string name="collection_item_reading_progress">Tiến độ đọc</string>
+    <string name="collection_menu_edit">Chỉnh sửa bộ sưu tập</string>
+    <string name="collection_menu_delete">Xóa bộ sưu tập</string>
+    <string name="dialog_delete_collection_title">Xóa bộ sưu tập</string>
+    <string name="dialog_delete_collection_message">Bạn có chắc chắn muốn xóa bộ sưu tập \"%1$s\"?\n(Các cuốn sách bên trong vẫn được giữ nguyên trong thư viện của bạn).</string>
+    <string name="msg_collection_deleted">Đã xóa bộ sưu tập</string>
+    <string name="msg_collection_deleted_empty">Bộ sưu tập đã tự động bị xóa vì không còn cuốn sách nào</string>
+    <string name="time_just_now">Vừa cập nhật</string>
+    <string name="time_hours_ago">%1$d giờ trước</string>
+    <string name="time_yesterday">Hôm qua</string>
+    <string name="time_days_ago">%1$d ngày trước</string>
+    <string name="time_weeks_ago">%1$d tuần trước</string>
+
+    <!-- Create / Edit Collection Dialog -->
+    <string name="dialog_create_collection_title">Tạo Bộ Sưu Tập Mới</string>
+    <string name="dialog_edit_collection_title">Chỉnh Sửa Bộ Sưu Tập</string>
+    <string name="label_collection_name_header">TÊN BỘ SƯU TẬP *</string>
+    <string name="hint_collection_name">Ví dụ: Triết Học Hiện Đại &amp; Tâm Lý</string>
+    <string name="label_collection_desc_header">MÔ TẢ (TÙY CHỌN)</string>
+    <string name="hint_collection_desc">Ghi chú mục đích, cảm xúc hoặc chủ đề đọc...</string>
+    <string name="label_collection_color_header">MÀU BIỂU TƯỢNG</string>
+    <string name="label_collection_icon_header">BIỂU TƯỢNG ĐẠI DIỆN</string>
+    <string name="label_collection_books_header">THÊM SÁCH VÀO BỘ SƯU TẬP *</string>
+    <string name="hint_search_in_library">Tìm kiếm sách trong thư viện...</string>
+    <string name="hint_no_books_found">Không tìm thấy sách phù hợp.</string>
+    <string name="btn_create_collection">Tạo Bộ Sưu Tập</string>
+    <string name="btn_create_collection_with_count">Tạo Bộ Sưu Tập (%1$d cuốn)</string>
+    <string name="btn_save_collection">Lưu Thay Đổi</string>
+    <string name="btn_save_collection_with_count">Lưu Thay Đổi (%1$d cuốn)</string>
+    <string name="error_collection_name_empty">Vui lòng nhập tên bộ sưu tập</string>
+    <string name="error_collection_must_have_books">Vui lòng chọn ít nhất 1 cuốn sách để tạo bộ sưu tập</string>
+    <string name="msg_collection_created">Đã tạo bộ sưu tập mới</string>
+    <string name="msg_collection_updated">Đã cập nhật bộ sưu tập</string>
+    <string name="count_books_format">%1$d cuốn</string>
+    <string name="collection_meta_prefix">Bộ sưu tập: %1$s</string>
+    <string name="collection_meta_untitled">Chưa đặt tên</string>
+    <string name="btn_toggle_meta_details">Chi tiết ▼</string>
+    <string name="btn_close">Đóng</string>
+    <string name="picker_chip_all">Tất cả (%1$d)</string>
+    <string name="picker_chip_unread">Chưa đọc (%1$d)</string>
+    <string name="picker_chip_reading">Đang đọc (%1$d)</string>
+    <string name="picker_chip_read">Đã đọc (%1$d)</string>
+
+    <!-- Extended Color & Icon Pickers -->
+    <string name="dialog_color_picker_title">Bảng màu bộ sưu tập</string>
+    <string name="dialog_color_picker_sub">Hơn 30 màu sắc phong phú hoặc nhập mã Hex trực tiếp</string>
+    <string name="dialog_icon_picker_title">Thư viện biểu tượng</string>
+    <string name="dialog_icon_picker_sub">Chọn biểu tượng phù hợp với chủ đề bộ sưu tập</string>
+    <string name="label_hex_code">MÃ MÀU HEX (#RRGGBB)</string>
+    <string name="label_material_palette">BẢNG MÀU MATERIAL CHỌN NHANH</string>
+    <string name="hint_hex_code">#7D562D</string>
+    <string name="btn_apply_color">Áp dụng màu</string>
+    <string name="error_invalid_hex">Mã Hex không hợp lệ (#RRGGBB hoặc #AARRGGBB)</string>
+
+    <string name="dialog_remove_book_title">Bỏ sách khỏi bộ</string>
+    <string name="dialog_remove_book_message">Bạn có chắc chắn muốn bỏ cuốn \"%1$s\" khỏi bộ sưu tập này?</string>
+    <string name="dialog_remove_book_confirm">Bỏ sách</string>
+    <string name="msg_book_removed_from_collection">Đã bỏ \"%1$s\" khỏi bộ sưu tập</string>
+
+    <!-- Statistics Screen -->
+    <string name="stats_status_offline_synced">DỮ LIỆU NGOẠI TUYẾN • ĐÃ ĐỒNG BỘ</string>
+    <string name="stats_card_total_books">Tổng số sách</string>
+    <string name="stats_card_total_sub">Bộ sưu tập</string>
+    <string name="stats_card_read">Đã đọc</string>
+    <string name="stats_card_read_sub">Hoàn thành</string>
+    <string name="stats_card_reading">Đang đọc</string>
+    <string name="stats_card_reading_sub">Tiến độ trang</string>
+    <string name="stats_section_categories_title">Phân bố theo thể loại</string>
+    <string name="stats_section_categories_sub">Sở thích &amp; khẩu vị đọc cá nhân</string>
+    <string name="stats_donut_center_label">TÁC PHẨM</string>
+    <string name="stats_favorite_category_label">THỂ LOẠI YÊU THÍCH</string>
+    <string name="stats_favorite_category_updating">Đang cập nhật</string>
+    <string name="stats_category_desc_empty">Tủ sách của bạn đang chờ những cuốn sách đầu tiên.</string>
+    <string name="stats_category_desc_format">Chiếm %1$d%% tủ sách, phản ánh khẩu vị và sở thích chiêm nghiệm của bạn.</string>
+    <string name="stats_section_status_title">Trạng thái đọc sách</string>
+    <string name="stats_section_status_sub">Tiến độ lưu trữ &amp; hoàn thành</string>
+    <string name="stats_status_completed">Đã hoàn thành</string>
+    <string name="stats_status_completed_desc">Đã chinh phục thành công</string>
+    <string name="stats_status_completed_sub">%1$d tác phẩm hoàn thành</string>
+    <string name="stats_status_reading">Đang say mê đọc</string>
+    <string name="stats_status_reading_desc">Đang theo dõi trang đọc</string>
+    <string name="stats_status_reading_sub">%1$d tác phẩm gối đầu giường</string>
+    <string name="stats_status_unread">Chưa đọc (Tủ sách chờ)</string>
+    <string name="stats_status_unread_desc">Sẵn sàng cho hành trình mới</string>
+    <string name="stats_status_unread_sub">Chờ khám phá</string>
+    <string name="stats_section_quotes_title">CẢM HỨNG CHIÊM NGHIỆM</string>
+    <string name="stats_quote_default">“Mỗi trang sách khép lại là một thế giới mới bắt đầu mở ra trong tâm thức.”</string>
+    <string name="stats_quote_default_source">— Thói quen đọc sách mỗi ngày</string>
+    <string name="stats_quote_source_fallback">— Trích dẫn tâm đắc</string>
+    <string name="stats_quote_source_page">Trang %1$s</string>
+    <string name="stats_quote_total_count">Tổng cộng: %1$d trích dẫn đã lưu</string>
+    <string name="stats_btn_view_library">Xem tủ sách ➔</string>
 </resources>

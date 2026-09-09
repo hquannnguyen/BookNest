@@ -61,6 +61,10 @@ class PreferenceManager(context: Context) {
         get() = prefs.getLong(KEY_BANNER_QUOTE_TIME, 0L)
         set(value) { prefs.edit().putLong(KEY_BANNER_QUOTE_TIME, value).apply() }
 
+    var collectionsSampleSeeded: Boolean
+        get() = prefs.getBoolean(KEY_COLLECTIONS_SEEDED, false)
+        set(value) { prefs.edit().putBoolean(KEY_COLLECTIONS_SEEDED, value).apply() }
+
     // language: KHONG luu o day.
     // AppCompatDelegate.getApplicationLocales() la source of truth duy nhat.
     // Dung LocaleHelper.setLocale() / LocaleHelper.getCurrentLanguage() de doc/ghi.
@@ -79,5 +83,6 @@ class PreferenceManager(context: Context) {
         private const val KEY_BANNER_QUOTE_CONTENT = "banner_quote_content"
         private const val KEY_BANNER_QUOTE_TITLE   = "banner_quote_title"
         private const val KEY_BANNER_QUOTE_TIME    = "banner_quote_time"
+        private const val KEY_COLLECTIONS_SEEDED   = "collections_seeded"
     }
 }

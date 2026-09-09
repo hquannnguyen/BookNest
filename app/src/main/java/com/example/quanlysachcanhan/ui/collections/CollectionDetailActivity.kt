@@ -208,10 +208,17 @@ class CollectionDetailActivity : AppCompatActivity() {
             finish()
             return
         }
-        currentCollection = col
 
-        val stats = collectionRepository.getCollectionWithStats(collectionId)
         allBooksInCollection = collectionRepository.getBooksInCollection(collectionId)
+        if (allBooksInCollection.isEmpty()) {
+            collectionRepository.delete(collectionId)
+            Toast.makeText(this, R.string.msg_collection_deleted_empty, Toast.LENGTH_SHORT).show()
+            NavigationHelper.finishWithSlide(this)
+            return
+        }
+
+        currentCollection = col
+        val stats = collectionRepository.getCollectionWithStats(collectionId)
 
         bindHeroCard(col, stats)
         bindFeaturedQuote(allBooksInCollection)
@@ -222,14 +229,7 @@ class CollectionDetailActivity : AppCompatActivity() {
 
     private fun bindHeroCard(col: BookCollection, stats: CollectionWithStats?) {
         // Icon & Colors
-        val iconRes = when (col.iconName) {
-            "psychology" -> R.drawable.ic_psychology
-            "trending_up" -> R.drawable.ic_trending_up
-            "account_balance" -> R.drawable.ic_account_balance
-            "favorite" -> R.drawable.ic_favorite
-            "science" -> R.drawable.ic_science
-            else -> R.drawable.ic_auto_stories
-        }
+        val iconRes = com.example.quanlysachcanhan.utils.CollectionIconHelper.getIconRes(col.iconName)
         binding.ivCollectionIcon.setImageResource(iconRes)
 
         try {
@@ -441,18 +441,25 @@ class CollectionDetailActivity : AppCompatActivity() {
 
     private fun confirmRemoveBook(book: Book) {
         AlertDialog.Builder(this)
-            .setTitle("Bỏ sách khỏi bộ")
-            .setMessage("Bạn có chắc chắn muốn bỏ cuốn \"${book.title}\" khỏi bộ sưu tập này?")
-            .setPositiveButton("Bỏ sách") { _, _ ->
+            .setTitle(R.string.dialog_remove_book_title)
+            .setMessage(getString(R.string.dialog_remove_book_message, book.title))
+            .setPositiveButton(R.string.dialog_remove_book_confirm) { _, _ ->
                 val success = collectionRepository.removeBookFromCollection(collectionId, book.id)
                 if (success) {
-                    Toast.makeText(this, "Đã bỏ \"${book.title}\" khỏi bộ sưu tập", Toast.LENGTH_SHORT).show()
-                    loadCollectionDetails()
+                    val remaining = collectionRepository.getBooksInCollection(collectionId)
+                    if (remaining.isEmpty()) {
+                        collectionRepository.delete(collectionId)
+                        Toast.makeText(this, R.string.msg_collection_deleted_empty, Toast.LENGTH_SHORT).show()
+                        NavigationHelper.finishWithSlide(this)
+                    } else {
+                        Toast.makeText(this, getString(R.string.msg_book_removed_from_collection, book.title), Toast.LENGTH_SHORT).show()
+                        loadCollectionDetails()
+                    }
                 } else {
                     Toast.makeText(this, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("Hủy", null)
+            .setNegativeButton(R.string.dialog_delete_cancel, null)
             .show()
     }
 

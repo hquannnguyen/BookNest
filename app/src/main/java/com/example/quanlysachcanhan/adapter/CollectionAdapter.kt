@@ -52,18 +52,15 @@ class CollectionAdapter(
             // 1. Title & Subtitle
             binding.tvCollectionName.text = col.name
 
-            val timeStr = formatUpdateTime(col.updatedAt)
-            binding.tvCollectionSub.text = "${item.totalBooks} cuốn sách • $timeStr"
+            val timeStr = formatUpdateTime(context, col.updatedAt)
+            binding.tvCollectionSub.text = context.getString(
+                R.string.collection_item_sub_format,
+                item.totalBooks,
+                timeStr
+            )
 
             // 2. Icon & Color
-            val iconRes = when (col.iconName) {
-                "psychology" -> R.drawable.ic_psychology
-                "trending_up" -> R.drawable.ic_trending_up
-                "account_balance" -> R.drawable.ic_account_balance
-                "favorite" -> R.drawable.ic_favorite
-                "science" -> R.drawable.ic_science
-                else -> R.drawable.ic_auto_stories
-            }
+            val iconRes = com.example.quanlysachcanhan.utils.CollectionIconHelper.getIconRes(col.iconName)
             binding.ivCollectionIcon.setImageResource(iconRes)
 
             try {
@@ -123,10 +120,10 @@ class CollectionAdapter(
             // 4. Progress Counts
             binding.tvProgressFraction.text = "${item.readBooks} / ${item.totalBooks}"
             if (item.totalBooks > 0 && item.readBooks == item.totalBooks) {
-                binding.tvProgressStatus.text = "Hoàn thành ✓"
+                binding.tvProgressStatus.text = context.getString(R.string.collection_item_completed)
                 binding.tvProgressStatus.setTextColor(ContextCompat.getColor(context, R.color.secondary_oak))
             } else {
-                binding.tvProgressStatus.text = "cuốn đã đọc"
+                binding.tvProgressStatus.text = context.getString(R.string.collection_item_books_read)
                 binding.tvProgressStatus.setTextColor(ContextCompat.getColor(context, R.color.text_hint))
             }
 
@@ -137,8 +134,8 @@ class CollectionAdapter(
             // 5. Options menu
             binding.btnMore.setOnClickListener { view ->
                 val popup = PopupMenu(context, view)
-                popup.menu.add(0, 1, 0, "Chỉnh sửa bộ sưu tập")
-                popup.menu.add(0, 2, 1, "Xóa bộ sưu tập")
+                popup.menu.add(0, 1, 0, context.getString(R.string.collection_menu_edit))
+                popup.menu.add(0, 2, 1, context.getString(R.string.collection_menu_delete))
                 popup.setOnMenuItemClickListener { menuItem ->
                     when (menuItem.itemId) {
                         1 -> onEditClick(item)
@@ -169,17 +166,17 @@ class CollectionAdapter(
             iv.imageTintList = ContextCompat.getColorStateList(context, R.color.text_hint)
         }
 
-        private fun formatUpdateTime(timeMs: Long): String {
+        private fun formatUpdateTime(context: android.content.Context, timeMs: Long): String {
             val diff = System.currentTimeMillis() - timeMs
             val hours = diff / (1000 * 60 * 60)
             val days = diff / (1000 * 60 * 60 * 24)
 
             return when {
-                hours < 1 -> "Vừa cập nhật"
-                hours < 24 -> "$hours giờ trước"
-                days == 1L -> "Hôm qua"
-                days < 7 -> "$days ngày trước"
-                days < 30 -> "${days / 7} tuần trước"
+                hours < 1 -> context.getString(R.string.time_just_now)
+                hours < 24 -> context.getString(R.string.time_hours_ago, hours.toInt())
+                days == 1L -> context.getString(R.string.time_yesterday)
+                days < 7 -> context.getString(R.string.time_days_ago, days.toInt())
+                days < 30 -> context.getString(R.string.time_weeks_ago, (days / 7).toInt())
                 else -> {
                     val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                     sdf.format(Date(timeMs))

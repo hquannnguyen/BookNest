@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardCollection"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -69,9 +70,9 @@
                     android:layout_marginTop="2dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="0 cuốn sách • Vừa cập nhật"
                     android:textColor="@color/text_secondary"
-                    android:textSize="11.5sp" />
+                    android:textSize="11.5sp"
+                    tools:text="0 cuốn sách • Vừa cập nhật" />
             </LinearLayout>
 
             <ImageButton
@@ -79,7 +80,7 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Tùy chọn bộ sưu tập"
+                android:contentDescription="@string/collection_menu_edit"
                 android:src="@drawable/ic_more_vert"
                 app:tint="@color/text_secondary" />
         </LinearLayout>
@@ -202,7 +203,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:letterSpacing="0.05"
-                    android:text="TIẾN ĐỘ"
+                    android:text="@string/collection_item_label_progress"
                     android:textColor="@color/secondary_oak"
                     android:textSize="9.5sp"
                     android:textStyle="bold" />
@@ -222,7 +223,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
-                    android:text="cuốn đã đọc"
+                    android:text="@string/collection_item_books_read"
                     android:textColor="@color/text_hint"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -244,7 +245,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tiến độ đọc"
+                    android:text="@string/collection_item_reading_progress"
                     android:textColor="@color/text_secondary"
                     android:textSize="11sp" />
 

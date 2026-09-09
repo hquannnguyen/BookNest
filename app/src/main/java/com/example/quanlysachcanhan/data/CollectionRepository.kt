@@ -98,6 +98,31 @@ class CollectionRepository(context: Context) {
         return rows > 0
     }
 
+    /**
+     * Dọn dẹp tự động các bộ sưu tập không còn cuốn sách nào.
+     */
+    fun cleanUpEmptyCollections(): Int {
+        val db = dbHelper.writableDatabase
+        val query = """
+            DELETE FROM ${DatabaseHelper.TABLE_COLLECTIONS}
+            WHERE ${DatabaseHelper.COL_COLLECTION_ID} NOT IN (
+                SELECT DISTINCT ${DatabaseHelper.COL_CB_COLLECTION_ID}
+                FROM ${DatabaseHelper.TABLE_COLLECTION_BOOKS}
+            )
+        """
+        db.beginTransaction()
+        return try {
+            val statement = db.compileStatement(query)
+            val deletedCount = statement.executeUpdateDelete()
+            db.setTransactionSuccessful()
+            deletedCount
+        } catch (e: Exception) {
+            0
+        } finally {
+            db.endTransaction()
+        }
+    }
+
     fun getById(id: Long): BookCollection? {
         val db = dbHelper.readableDatabase
         val cursor = db.query(
