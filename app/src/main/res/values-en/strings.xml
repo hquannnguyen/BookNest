@@ -324,4 +324,26 @@
     <string name="stats_quote_source_page">Page %1$s</string>
     <string name="stats_quote_total_count">Total: %1$d quotes saved</string>
     <string name="stats_btn_view_library">View Library ➔</string>
+    <string name="bookshelf_open">3D bookshelf</string>
+    <string name="bookshelf_back">Back to collection</string>
+    <string name="bookshelf_hint">Drag to rotate · Pinch to zoom · Tap a book for details</string>
+    <string name="bookshelf_zoom_in">Zoom in</string>
+    <string name="bookshelf_zoom_out">Zoom out</string>
+    <string name="bookshelf_reset">Reset view</string>
+    <string name="bookshelf_previous">Previous page</string>
+    <string name="bookshelf_next">Next page</string>
+    <string name="bookshelf_choose">Choose a book from the list</string>
+    <string name="bookshelf_loading">Arranging your books…</string>
+    <string name="bookshelf_missing">This collection no longer exists.</string>
+    <string name="bookshelf_error">Could not load the bookshelf. Go back and try opening it again.</string>
+    <string name="bookshelf_empty">There are no books in this collection yet.</string>
+    <string name="bookshelf_page">Page %1$d/%2$d · Books: %3$d</string>
+    <string name="notification_warning_no_permission">⚠️ Note: Notification permission is not granted in system settings. Please enable it to receive reminders on time.</string>
+    <string name="msg_notification_permission_rationale">Please enable notifications in system settings to receive reading reminders</string>
+    <string name="msg_camera_permission_denied">Camera permission is required to take photos</string>
+    <string name="msg_book_cover_removed">Book cover removed</string>
+    <string name="msg_book_cover_updated">Book cover updated</string>
+    <string name="btn_choose_from_gallery">Choose from Gallery</string>
+    <string name="btn_remove_book_cover">Remove book cover</string>
+    <string name="dialog_book_cover_title">Book Cover Image</string>
 </resources>

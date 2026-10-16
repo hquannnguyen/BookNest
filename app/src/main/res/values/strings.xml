@@ -343,4 +343,28 @@
     <string name="stats_quote_source_page">Trang %1$s</string>
     <string name="stats_quote_total_count">Tổng cộng: %1$d trích dẫn đã lưu</string>
     <string name="stats_btn_view_library">Xem tủ sách ➔</string>
+    <string name="bookshelf_open">Kệ sách 3D</string>
+    <string name="bookshelf_back">Quay lại bộ sưu tập</string>
+    <string name="bookshelf_hint">Kéo để xoay · Chụm hai ngón để thu phóng · Chạm sách để xem chi tiết</string>
+    <string name="bookshelf_zoom_in">Phóng to</string>
+    <string name="bookshelf_zoom_out">Thu nhỏ</string>
+    <string name="bookshelf_reset">Đặt lại góc nhìn</string>
+    <string name="bookshelf_previous">Trang trước</string>
+    <string name="bookshelf_next">Trang sau</string>
+    <string name="bookshelf_choose">Chọn sách từ danh sách</string>
+    <string name="bookshelf_loading">Đang xếp sách lên kệ…</string>
+    <string name="bookshelf_missing">Bộ sưu tập này không còn tồn tại.</string>
+    <string name="bookshelf_error">Không thể tải kệ sách. Hãy quay lại và thử mở lại.</string>
+    <string name="bookshelf_empty">Chưa có sách trong bộ sưu tập.</string>
+    <string name="bookshelf_page">Trang %1$d/%2$d · Số sách: %3$d</string>
+    <string name="bookshelf_minus" translatable="false">−</string>
+    <string name="bookshelf_plus" translatable="false">+</string>
+    <string name="notification_warning_no_permission">⚠️ Chú ý: Bạn chưa cấp quyền thông báo cho BookNest trong cài đặt máy. Vui lòng cấp quyền để nhận nhắc nhở đúng giờ.</string>
+    <string name="msg_notification_permission_rationale">Vui lòng bật quyền thông báo trong Cài đặt hệ thống để nhận nhắc nhở đọc sách</string>
+    <string name="msg_camera_permission_denied">Ứng dụng cần quyền Camera để chụp ảnh</string>
+    <string name="msg_book_cover_removed">Đã xóa ảnh bìa sách</string>
+    <string name="msg_book_cover_updated">Đã cập nhật ảnh bìa sách</string>
+    <string name="btn_choose_from_gallery">Chọn ảnh từ Thư viện</string>
+    <string name="btn_remove_book_cover">Xóa ảnh bìa hiện tại</string>
+    <string name="dialog_book_cover_title">Ảnh bìa sách</string>
 </resources>

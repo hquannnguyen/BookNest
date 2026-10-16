@@ -165,6 +165,16 @@
             android:orientation="vertical"
             android:paddingBottom="24dp">
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBookshelf3d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/bookshelf_open"
+                android:textColor="@color/surface_card"
+                app:backgroundTint="@color/primary_navy"
+                app:cornerRadius="12dp" />
             <!-- Hero Card / Collection Overview -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardHero"

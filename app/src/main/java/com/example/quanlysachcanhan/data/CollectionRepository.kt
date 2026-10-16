@@ -10,9 +10,11 @@ import com.example.quanlysachcanhan.model.BookCollection
 import com.example.quanlysachcanhan.model.CollectionWithStats
 import com.example.quanlysachcanhan.utils.Constants
 
-class CollectionRepository(context: Context) {
+class CollectionRepository(context: Context) : java.io.Closeable {
 
     private val dbHelper = DatabaseHelper(context)
+
+    override fun close() { dbHelper.close() }
 
     fun insert(collection: BookCollection, bookIds: List<Long> = emptyList()): Long {
         val db = dbHelper.writableDatabase

@@ -77,6 +77,12 @@ class CollectionDetailActivity : AppCompatActivity() {
         setupRecyclerView()
         setupFilterPills()
         setupActions()
+        binding.btnBookshelf3d.setOnClickListener {
+            NavigationHelper.startActivitySlide(this,
+                Intent(this, Bookshelf3DActivity::class.java).apply {
+                    putExtra(EXTRA_COLLECTION_ID, collectionId)
+                })
+        }
 
         loadCollectionDetails()
     }

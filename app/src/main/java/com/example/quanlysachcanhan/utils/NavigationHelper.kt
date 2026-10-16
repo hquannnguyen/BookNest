@@ -157,10 +157,16 @@ object NavigationHelper {
         val hour = preferenceManager.reminderHour
         val minute = preferenceManager.reminderMinute
 
-        val message = if (isEnabled) {
+        val baseMessage = if (isEnabled) {
             activity.getString(R.string.notification_bell_active_msg, hour, minute)
         } else {
             activity.getString(R.string.notification_bell_inactive_msg)
+        }
+
+        val message = if (isEnabled && !androidx.core.app.NotificationManagerCompat.from(activity).areNotificationsEnabled()) {
+            "$baseMessage\n\n${activity.getString(R.string.notification_warning_no_permission)}"
+        } else {
+            baseMessage
         }
 
         dialogBinding.tvAlertMessage.text = message
