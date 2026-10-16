@@ -234,6 +234,7 @@ class BookRepository(context: Context) {
         put(DatabaseHelper.COL_BOOK_COVER, coverImagePath)
         put(DatabaseHelper.COL_BOOK_CURRENT_PAGE, currentPage)
         put(DatabaseHelper.COL_BOOK_TOTAL_PAGES, totalPages)
+        put(DatabaseHelper.COL_BOOK_PUBLISHER, publisher)
         put(DatabaseHelper.COL_BOOK_CREATED_AT, createdAt)
 
         if (updatedAt != null) {
@@ -255,6 +256,7 @@ class BookRepository(context: Context) {
             val finishedIndex = getColumnIndex(DatabaseHelper.COL_BOOK_FINISHED_AT)
             val curPageIndex = getColumnIndex(DatabaseHelper.COL_BOOK_CURRENT_PAGE)
             val totalPagesIndex = getColumnIndex(DatabaseHelper.COL_BOOK_TOTAL_PAGES)
+            val publisherIndex = getColumnIndex(DatabaseHelper.COL_BOOK_PUBLISHER)
 
             return Book(
                 id = getLong(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_ID)),
@@ -267,6 +269,7 @@ class BookRepository(context: Context) {
                 coverImagePath = getString(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_COVER)),
                 currentPage = if (curPageIndex >= 0 && !isNull(curPageIndex)) getInt(curPageIndex) else 0,
                 totalPages = if (totalPagesIndex >= 0 && !isNull(totalPagesIndex)) getInt(totalPagesIndex) else 0,
+                publisher = if (publisherIndex >= 0 && !isNull(publisherIndex)) getString(publisherIndex) else "",
                 createdAt = getLong(getColumnIndexOrThrow(DatabaseHelper.COL_BOOK_CREATED_AT)),
                 updatedAt = if (updatedIndex >= 0 && !isNull(updatedIndex)) getLong(updatedIndex) else null,
                 finishedAt = if (finishedIndex >= 0 && !isNull(finishedIndex)) getLong(finishedIndex) else null

@@ -1,9 +1,12 @@
 package com.example.quanlysachcanhan.ui.settings
 
+import android.Manifest
 import android.app.TimePickerDialog
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.quanlysachcanhan.R
 import com.example.quanlysachcanhan.data.BookRepository
@@ -26,6 +30,7 @@ import com.example.quanlysachcanhan.utils.ImageStorageHelper
 import com.example.quanlysachcanhan.utils.LocaleHelper
 import com.example.quanlysachcanhan.utils.PreferenceManager
 import com.example.quanlysachcanhan.utils.ReadingReminderHelper
+import com.example.quanlysachcanhan.utils.ReadingReminderReceiver
 import java.io.File
 import java.util.Locale
 
@@ -37,6 +42,34 @@ class SettingsFragment : Fragment() {
     private lateinit var preferenceManager: PreferenceManager
     private lateinit var bookRepository: BookRepository
     private lateinit var quoteRepository: QuoteRepository
+
+    private val notificationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        val ctx = context ?: return@registerForActivityResult
+        if (isGranted) {
+            preferenceManager.reminderEnabled = true
+            binding.switchReminder.isChecked = true
+            ReadingReminderHelper.scheduleReminder(
+                ctx,
+                preferenceManager.reminderHour,
+                preferenceManager.reminderMinute
+            )
+            Toast.makeText(
+                ctx,
+                getString(R.string.msg_reminder_set, preferenceManager.reminderHour, preferenceManager.reminderMinute),
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            preferenceManager.reminderEnabled = false
+            binding.switchReminder.isChecked = false
+            Toast.makeText(
+                ctx,
+                getString(R.string.msg_notification_permission_denied),
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
 
     private val pickAvatarLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()
@@ -194,8 +227,14 @@ class SettingsFragment : Fragment() {
         }
         binding.switchReminder.setOnCheckedChangeListener { _, isChecked ->
             val ctx = context ?: return@setOnCheckedChangeListener
-            preferenceManager.reminderEnabled = isChecked
             if (isChecked) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                    ContextCompat.checkSelfPermission(ctx, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    return@setOnCheckedChangeListener
+                }
+                preferenceManager.reminderEnabled = true
                 ReadingReminderHelper.scheduleReminder(
                     ctx,
                     preferenceManager.reminderHour,
@@ -207,6 +246,7 @@ class SettingsFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
+                preferenceManager.reminderEnabled = false
                 ReadingReminderHelper.cancelReminder(ctx)
                 Toast.makeText(ctx, getString(R.string.msg_reminder_disabled), Toast.LENGTH_SHORT).show()
             }
@@ -215,6 +255,19 @@ class SettingsFragment : Fragment() {
         // Đặt giờ nhắc nhở
         binding.layoutReminderTimeRow.setOnClickListener {
             showTimePicker()
+        }
+
+        // Thử nghiệm gửi thông báo ngay
+        binding.layoutTestReminderRow.setOnClickListener {
+            val ctx = context ?: return@setOnClickListener
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                ContextCompat.checkSelfPermission(ctx, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+            ) {
+                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                return@setOnClickListener
+            }
+            ReadingReminderReceiver.sendNotification(ctx, isTest = true)
+            Toast.makeText(ctx, getString(R.string.msg_test_notification_sent), Toast.LENGTH_SHORT).show()
         }
 
         // Sắp xếp mặc định

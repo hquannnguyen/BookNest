@@ -48,6 +48,10 @@
     <string name="notification_channel_desc">Daily reading habit reminder notifications</string>
     <string name="notification_reminder_title">Time to read! 📚</string>
     <string name="notification_reminder_message">Take a few minutes to continue reading your book today.</string>
+    <string name="pref_test_reminder_title">Test notification</string>
+    <string name="pref_test_reminder_action">Send now</string>
+    <string name="msg_test_notification_sent">Test reading reminder notification sent</string>
+    <string name="msg_notification_permission_denied">Notification permission is required for daily reading reminders</string>
 
     <!-- Theme Selection -->
     <string name="dialog_theme_title">Display Theme</string>
@@ -59,9 +63,11 @@
     <!-- AddEditBookActivity -->
     <string name="hint_title">Enter book title...</string>
     <string name="hint_author">Author, translator name...</string>
+    <string name="hint_publisher">Publisher name (optional)...</string>
     <string name="hint_note">Write down memorable quotes, thoughts, or synopsis...</string>
     <string name="label_title_header">BOOK TITLE *</string>
     <string name="label_author_header">AUTHOR *</string>
+    <string name="label_publisher_header">PUBLISHER</string>
     <string name="label_add_cover">Add book cover</string>
     <string name="label_cover_ratio_hint">Recommended ratio 2:3</string>
     <string name="label_optional">Optional</string>
@@ -114,6 +120,7 @@
     <string name="label_publishing_info">Publishing &amp; Format Info</string>
     <string name="label_publisher_title">Publisher:</string>
     <string name="label_publisher_value">Literature Publishing</string>
+    <string name="label_publisher_none">Not specified</string>
     <string name="label_format_title">Format:</string>
     <string name="label_format_value">Hardcover</string>
     <string name="label_storage_title">Storage engine:</string>

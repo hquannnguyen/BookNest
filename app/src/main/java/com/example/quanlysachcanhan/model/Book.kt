@@ -11,6 +11,7 @@ data class Book(
     val coverImagePath: String? = null,
     val currentPage: Int = 0,
     val totalPages: Int = 0,
+    val publisher: String = "",
     val createdAt: Long = System.currentTimeMillis(),
     val updatedAt: Long? = null,
     val finishedAt: Long? = null

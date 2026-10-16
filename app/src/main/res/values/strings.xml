@@ -51,6 +51,10 @@
     <string name="notification_channel_desc">Thông báo nhắc duy trì thói quen đọc sách hàng ngày</string>
     <string name="notification_reminder_title">Đã đến giờ đọc sách! 📚</string>
     <string name="notification_reminder_message">Hãy dành vài phút để tiếp tục đọc cuốn sách của bạn nhé.</string>
+    <string name="pref_test_reminder_title">Thử nghiệm thông báo</string>
+    <string name="pref_test_reminder_action">Gửi ngay</string>
+    <string name="msg_test_notification_sent">Đã gửi thông báo nhắc nhở đọc sách thử nghiệm</string>
+    <string name="msg_notification_permission_denied">Cần cấp quyền thông báo để BookNest gửi lời nhắc đọc sách hàng ngày</string>
 
     <!-- Theme Selection -->
     <string name="dialog_theme_title">Chế độ giao diện</string>
@@ -62,9 +66,11 @@
     <!-- AddEditBookActivity -->
     <string name="hint_title">Nhập tựa đề tác phẩm...</string>
     <string name="hint_author">Tên tác giả, người dịch...</string>
+    <string name="hint_publisher">Tên nhà xuất bản (tùy chọn)...</string>
     <string name="hint_note">Ghi lại cảm nghĩ hoặc tóm tắt ý chính của cuốn sách...</string>
     <string name="label_title_header">TÊN SÁCH *</string>
     <string name="label_author_header">TÁC GIẢ *</string>
+    <string name="label_publisher_header">NHÀ XUẤT BẢN</string>
     <string name="label_add_cover">Thêm bìa sách</string>
     <string name="label_cover_ratio_hint">Khuyên dùng tỉ lệ 2:3</string>
     <string name="label_optional">Tùy chọn</string>
@@ -119,6 +125,7 @@
     <string name="label_publishing_info">Thông tin xuất bản &amp; Bản quyền</string>
     <string name="label_publisher_title">Nhà xuất bản:</string>
     <string name="label_publisher_value">NXB Văn Học</string>
+    <string name="label_publisher_none">Chưa cập nhật</string>
     <string name="label_format_title">Định dạng đọc:</string>
     <string name="label_format_value">Bìa cứng (Hardcover)</string>
     <string name="label_storage_title">Bộ nhớ dữ liệu:</string>

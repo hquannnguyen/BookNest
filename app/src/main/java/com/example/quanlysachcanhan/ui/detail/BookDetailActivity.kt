@@ -187,11 +187,24 @@ class BookDetailActivity : AppCompatActivity() {
     private fun loadBook() {
         val book = bookRepository.getById(bookId) ?: return
 
-        // 1. Tên sách, tác giả, thể loại
+        // 1. Tên sách, tác giả, thể loại, nhà xuất bản
         binding.tvTitle.text        = book.title
         binding.tvAuthor.text       = book.author
         binding.tvCategory.text     = getCategoryLabel(book.category)
         binding.tvInfoCategory.text = getCategoryLabel(book.category)
+
+        // Tag Nhà xuất bản (thay cho SQLite Offline cũ, hiện nếu có thông tin)
+        if (book.publisher.isNotBlank()) {
+            binding.tvPublisher.visibility = View.VISIBLE
+            binding.tvPublisher.text = book.publisher
+        } else {
+            binding.tvPublisher.visibility = View.GONE
+        }
+
+        // Thông tin NXB trong bảng xuất bản
+        binding.tvInfoPublisher.text = book.publisher.ifBlank {
+            getString(R.string.label_publisher_none)
+        }
 
         // 2. Ghi chú cá nhân
         binding.tvNote.text = if (book.note.isNotBlank()) {

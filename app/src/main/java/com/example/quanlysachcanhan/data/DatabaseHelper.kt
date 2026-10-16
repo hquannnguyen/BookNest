@@ -49,6 +49,11 @@ class DatabaseHelper(context: Context) :
             db.execSQL(CREATE_COLLECTION_BOOKS_TABLE)
             createCollectionIndexes(db)
         }
+        if (oldVersion < 5) {
+            db.execSQL(
+                "ALTER TABLE $TABLE_BOOKS ADD COLUMN $COL_BOOK_PUBLISHER TEXT NOT NULL DEFAULT ''"
+            )
+        }
     }
 
     private fun createIndexes(db: SQLiteDatabase) {
@@ -67,7 +72,7 @@ class DatabaseHelper(context: Context) :
 
     companion object {
         const val DATABASE_NAME = "personal_books.db"
-        const val DATABASE_VERSION = 4
+        const val DATABASE_VERSION = 5
 
         const val TABLE_BOOKS = "books"
         const val COL_BOOK_ID = "id"
@@ -80,6 +85,7 @@ class DatabaseHelper(context: Context) :
         const val COL_BOOK_COVER = "cover_image_path"
         const val COL_BOOK_CURRENT_PAGE = "current_page"
         const val COL_BOOK_TOTAL_PAGES = "total_pages"
+        const val COL_BOOK_PUBLISHER = "publisher"
         const val COL_BOOK_CREATED_AT = "created_at"
         const val COL_BOOK_UPDATED_AT = "updated_at"
         const val COL_BOOK_FINISHED_AT = "finished_at"
@@ -119,6 +125,7 @@ class DatabaseHelper(context: Context) :
                 $COL_BOOK_COVER TEXT,
                 $COL_BOOK_CURRENT_PAGE INTEGER NOT NULL DEFAULT 0,
                 $COL_BOOK_TOTAL_PAGES INTEGER NOT NULL DEFAULT 0,
+                $COL_BOOK_PUBLISHER TEXT NOT NULL DEFAULT '',
                 $COL_BOOK_CREATED_AT INTEGER NOT NULL,
                 $COL_BOOK_UPDATED_AT INTEGER,
                 $COL_BOOK_FINISHED_AT INTEGER

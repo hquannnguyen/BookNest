@@ -277,6 +277,7 @@ class AddEditBookActivity : AppCompatActivity() {
 
         binding.edtTitle.setText(book.title)
         binding.edtAuthor.setText(book.author)
+        binding.edtPublisher.setText(book.publisher)
         binding.edtNote.setText(book.note)
         currentRating = book.rating
         updateHeartRatingUI(book.rating)
@@ -313,8 +314,9 @@ class AddEditBookActivity : AppCompatActivity() {
     }
 
     private fun saveBook() {
-        val title  = binding.edtTitle.text.toString().trim()
-        val author = binding.edtAuthor.text.toString().trim()
+        val title     = binding.edtTitle.text.toString().trim()
+        val author    = binding.edtAuthor.text.toString().trim()
+        val publisher = binding.edtPublisher.text.toString().trim()
 
         if (title.isBlank()) {
             binding.edtTitle.error = getString(R.string.error_title_empty)
@@ -368,6 +370,7 @@ class AddEditBookActivity : AppCompatActivity() {
             coverImagePath = currentCoverPath,
             currentPage    = currentPage,
             totalPages     = totalPages,
+            publisher      = publisher,
             createdAt      = oldBook?.createdAt ?: System.currentTimeMillis(),
             updatedAt      = oldBook?.updatedAt,
             finishedAt     = finishedAt

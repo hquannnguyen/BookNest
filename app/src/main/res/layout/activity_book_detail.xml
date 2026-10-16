@@ -323,16 +323,19 @@
                             tools:text="Văn học kinh điển" />
 
                         <TextView
+                            android:id="@+id/tvPublisher"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
                             android:background="@drawable/bg_quote_field"
                             android:paddingHorizontal="10dp"
                             android:paddingVertical="3dp"
-                            android:text="SQLite Offline"
                             android:textColor="@color/primary_navy"
                             android:textSize="11.5sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:visibility="gone"
+                            tools:text="NXB Văn Học"
+                            tools:visibility="visible" />
                     </LinearLayout>
 
                     <!-- Rating & Quotes Count Display -->
@@ -823,6 +826,7 @@
                                     android:textSize="11sp" />
 
                                 <TextView
+                                    android:id="@+id/tvInfoPublisher"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="2dp"
