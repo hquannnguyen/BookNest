@@ -1,5 +1,7 @@
 package com.example.quanlysachcanhan.ui.addedit
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -7,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
@@ -14,6 +17,8 @@ import com.example.quanlysachcanhan.R
 import com.example.quanlysachcanhan.data.BookRepository
 import com.example.quanlysachcanhan.data.QuoteRepository
 import com.example.quanlysachcanhan.databinding.ActivityAddEditBookBinding
+import com.example.quanlysachcanhan.databinding.DialogCustomSelectionBinding
+import com.example.quanlysachcanhan.databinding.ItemDialogOptionBinding
 import com.example.quanlysachcanhan.databinding.ItemQuoteEditorBinding
 import com.example.quanlysachcanhan.model.Book
 import com.example.quanlysachcanhan.model.Quote
@@ -37,6 +42,28 @@ class AddEditBookActivity : AppCompatActivity() {
     private var editingBookId: Long = 0L
     private var currentCoverPath: String? = null
     private var currentRating: Float = 0f
+
+    private var tempCoverUri: Uri? = null
+    private var tempCoverFile: File? = null
+
+    // Chụp ảnh bìa từ máy ảnh hệ thống (ủy quyền qua FileProvider)
+    private val takePhotoLauncher = registerForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) { isSuccess ->
+        val uri = tempCoverUri
+        if (isSuccess && uri != null) {
+            val savedPath = ImageStorageHelper.copyImageToAppStorage(this, uri)
+            if (savedPath != null) {
+                currentCoverPath = savedPath
+                displayCoverImage(savedPath)
+            } else {
+                Toast.makeText(this, "Không thể lưu ảnh bìa", Toast.LENGTH_SHORT).show()
+            }
+        }
+        tempCoverFile?.let { ImageStorageHelper.deleteImage(it.absolutePath) }
+        tempCoverUri = null
+        tempCoverFile = null
+    }
 
     // Image Picker mở thư viện ảnh và sao chép vào bộ nhớ ứng dụng
     private val pickImageLauncher = registerForActivityResult(
@@ -210,19 +237,76 @@ class AddEditBookActivity : AppCompatActivity() {
             }
         }
 
-        // Khung ảnh và nút camera
+        // Khung ảnh và nút camera: mở hộp thoại chọn chụp hoặc chọn từ thư viện
         binding.layoutCoverTrigger.setOnClickListener {
-            pickImageLauncher.launch("image/*")
+            showCoverOptionsDialog()
         }
 
         binding.btnChooseCover.setOnClickListener {
-            pickImageLauncher.launch("image/*")
+            showCoverOptionsDialog()
         }
 
         // Nút thêm trích dẫn mới
         binding.btnAddQuote.setOnClickListener {
             addQuoteItem(Quote(bookId = editingBookId, content = ""))
         }
+    }
+
+    private fun launchCameraForCover() {
+        val pair = ImageStorageHelper.createTempCameraUri(this)
+        if (pair != null) {
+            tempCoverFile = pair.first
+            tempCoverUri = pair.second
+            takePhotoLauncher.launch(pair.second)
+        } else {
+            Toast.makeText(this, getString(R.string.msg_camera_error), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showCoverOptionsDialog() {
+        val dialogBinding = DialogCustomSelectionBinding.inflate(layoutInflater)
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogBinding.root)
+            .create()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialogBinding.tvDialogTitle.text = getString(R.string.dialog_choose_cover_title)
+
+        val options = mutableListOf<Pair<String, () -> Unit>>()
+        options.add(Pair(getString(R.string.btn_take_photo)) {
+            launchCameraForCover()
+        })
+        options.add(Pair(getString(R.string.btn_choose_gallery)) {
+            pickImageLauncher.launch("image/*")
+        })
+
+        if (!currentCoverPath.isNullOrBlank()) {
+            options.add(Pair(getString(R.string.btn_remove_cover)) {
+                currentCoverPath = null
+                binding.imgCover.visibility = View.GONE
+                binding.layoutCoverPlaceholder.visibility = View.VISIBLE
+            })
+        }
+
+        options.forEach { (title, action) ->
+            val itemBinding = ItemDialogOptionBinding.inflate(layoutInflater, dialogBinding.containerOptions, false)
+            itemBinding.ivOptionIcon.visibility = View.GONE
+            itemBinding.tvOptionIcon.visibility = View.GONE
+            itemBinding.tvOptionText.text = title
+            itemBinding.ivOptionCheck.visibility = View.GONE
+
+            itemBinding.layoutOptionItem.setOnClickListener {
+                dialog.dismiss()
+                action()
+            }
+            dialogBinding.containerOptions.addView(itemBinding.root)
+        }
+
+        dialogBinding.btnDialogCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun addQuoteItem(quote: Quote) {

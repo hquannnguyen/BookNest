@@ -71,6 +71,28 @@ class SettingsFragment : Fragment() {
         }
     }
 
+    private var tempAvatarUri: Uri? = null
+    private var tempAvatarFile: File? = null
+
+    private val takeAvatarLauncher = registerForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) { isSuccess ->
+        val ctx = context ?: return@registerForActivityResult
+        val uri = tempAvatarUri
+        if (isSuccess && uri != null) {
+            val savedPath = ImageStorageHelper.copyImageToAppStorage(ctx, uri)
+            if (savedPath != null) {
+                ImageStorageHelper.deleteImage(preferenceManager.userAvatarPath)
+                preferenceManager.userAvatarPath = savedPath
+                bindAvatar()
+                Toast.makeText(ctx, getString(R.string.msg_avatar_updated), Toast.LENGTH_SHORT).show()
+            }
+        }
+        tempAvatarFile?.let { ImageStorageHelper.deleteImage(it.absolutePath) }
+        tempAvatarUri = null
+        tempAvatarFile = null
+    }
+
     private val pickAvatarLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
@@ -357,6 +379,18 @@ class SettingsFragment : Fragment() {
         ).show()
     }
 
+    private fun launchCameraForAvatar() {
+        val ctx = context ?: return
+        val pair = ImageStorageHelper.createTempCameraUri(ctx)
+        if (pair != null) {
+            tempAvatarFile = pair.first
+            tempAvatarUri = pair.second
+            takeAvatarLauncher.launch(pair.second)
+        } else {
+            Toast.makeText(ctx, getString(R.string.msg_camera_error), Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun showAvatarOptionsDialog() {
         val ctx = context ?: return
         val dialogBinding = DialogCustomSelectionBinding.inflate(layoutInflater)
@@ -370,7 +404,10 @@ class SettingsFragment : Fragment() {
         val hasCustomAvatar = !preferenceManager.userAvatarPath.isNullOrBlank()
 
         val options = mutableListOf<Pair<String, () -> Unit>>()
-        options.add(Pair(getString(R.string.btn_choose_new_avatar)) {
+        options.add(Pair(getString(R.string.btn_take_photo)) {
+            launchCameraForAvatar()
+        })
+        options.add(Pair(getString(R.string.btn_choose_gallery)) {
             pickAvatarLauncher.launch("image/*")
         })
 

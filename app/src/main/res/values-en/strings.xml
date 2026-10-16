@@ -203,10 +203,15 @@
     <string name="about_app_desc">BookNest - A personal library sanctuary. All your data is encrypted and stored locally on your device.</string>
     <string name="privacy_policy_desc">BookNest respects your privacy. The app is 100% Offline-First and never transmits your books, notes, or quotes to any server.</string>
     <string name="dialog_avatar_options_title">Profile Avatar</string>
+    <string name="btn_take_photo">Take new photo</string>
+    <string name="btn_choose_gallery">Choose from gallery</string>
     <string name="btn_choose_new_avatar">Choose from gallery</string>
+    <string name="dialog_choose_cover_title">Book Cover Image</string>
+    <string name="btn_remove_cover">Remove current cover</string>
     <string name="btn_remove_avatar">Use default icon</string>
     <string name="msg_avatar_updated">Avatar updated</string>
     <string name="msg_avatar_removed">Default avatar restored</string>
+    <string name="msg_camera_error">Unable to open camera</string>
     <string name="btn_cancel">Cancel</string>
 
     <!-- Collections Screen -->

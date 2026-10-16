@@ -40,6 +40,22 @@ object ImageStorageHelper {
         }.getOrNull()
     }
 
+    fun createTempCameraUri(context: Context): Pair<File, Uri>? {
+        return runCatching {
+            val cacheDir = File(context.cacheDir, "camera")
+            if (!cacheDir.exists()) {
+                cacheDir.mkdirs()
+            }
+            val tempFile = File(cacheDir, "capture_${System.currentTimeMillis()}.jpg")
+            val uri = androidx.core.content.FileProvider.getUriForFile(
+                context,
+                "${context.packageName}.fileprovider",
+                tempFile
+            )
+            Pair(tempFile, uri)
+        }.getOrNull()
+    }
+
     fun deleteImage(path: String?) {
         if (path.isNullOrBlank()) return
         runCatching { File(path).delete() }

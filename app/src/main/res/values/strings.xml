@@ -222,10 +222,15 @@
     <string name="about_app_desc">BookNest - Ứng dụng quản lý tủ sách cá nhân theo phong cách Literary Sanctuary. Toàn bộ dữ liệu được mã hóa và lưu trữ ngoại tuyến trên thiết bị của bạn.</string>
     <string name="privacy_policy_desc">BookNest tôn trọng quyền riêng tư của bạn. Ứng dụng hoạt động 100% ngoại tuyến (Offline-First), không gửi dữ liệu sách, ghi chú hoặc trích dẫn của bạn lên bất kỳ máy chủ nào.</string>
     <string name="dialog_avatar_options_title">Ảnh đại diện độc giả</string>
+    <string name="btn_take_photo">Chụp ảnh mới</string>
+    <string name="btn_choose_gallery">Chọn ảnh từ thư viện</string>
     <string name="btn_choose_new_avatar">Chọn ảnh từ thư viện</string>
+    <string name="dialog_choose_cover_title">Ảnh bìa tác phẩm</string>
+    <string name="btn_remove_cover">Xóa ảnh bìa hiện tại</string>
     <string name="btn_remove_avatar">Sử dụng biểu tượng mặc định</string>
     <string name="msg_avatar_updated">Đã cập nhật ảnh đại diện</string>
     <string name="msg_avatar_removed">Đã khôi phục ảnh đại diện mặc định</string>
+    <string name="msg_camera_error">Không thể khởi động máy ảnh</string>
     <string name="btn_cancel">Hủy</string>
 
     <!-- Collections Screen -->
