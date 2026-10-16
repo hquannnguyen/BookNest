@@ -321,46 +321,18 @@ class CollectionRepository(context: Context) : java.io.Closeable {
         )
     }
 
+    fun cleanUpEmptySampleCollections() {
+        val sampleNames = setOf("Triết Học & Nhân Sinh", "Phát Triển Bản Thân", "Kinh Điển Phải Đọc Lại")
+        val all = getAllWithStats()
+        for (item in all) {
+            if (item.collection.name in sampleNames && item.totalBooks == 0) {
+                delete(item.collection.id)
+            }
+        }
+    }
+
     fun seedSampleCollectionsIfEmpty(allBooks: List<Book>) {
-        val db = dbHelper.readableDatabase
-        val cursor = db.rawQuery("SELECT COUNT(*) FROM ${DatabaseHelper.TABLE_COLLECTIONS}", null)
-        val count = cursor.use { if (it.moveToFirst()) it.getInt(0) else 0 }
-        if (count > 0) return
-
-        val bookIdList = allBooks.map { it.id }
-
-        // Sample 1: Triết Học & Nhân Sinh
-        insert(
-            BookCollection(
-                name = "Triết Học & Nhân Sinh",
-                description = "Những tác phẩm khai sáng tâm trí, soi rọi lẽ sống và chiêm nghiệm chiều sâu nội tâm.",
-                colorHex = "#7D562D",
-                iconName = "psychology"
-            ),
-            bookIds = bookIdList.take(3)
-        )
-
-        // Sample 2: Phát Triển Bản Thân
-        insert(
-            BookCollection(
-                name = "Phát Triển Bản Thân",
-                description = "Xây dựng thói quen tích cực, rèn luyện tư duy kỷ luật và nâng tầm hiệu suất.",
-                colorHex = "#FFCA98",
-                iconName = "trending_up"
-            ),
-            bookIds = bookIdList.drop(1).take(3)
-        )
-
-        // Sample 3: Kinh Điển Phải Đọc Lại
-        insert(
-            BookCollection(
-                name = "Kinh Điển Phải Đọc Lại",
-                description = "Những áng văn bất hủ vượt thời gian lưu giữ giá trị nhân văn sâu sắc.",
-                colorHex = "#031632",
-                iconName = "auto_stories"
-            ),
-            bookIds = bookIdList.drop(2).take(4)
-        )
+        // Không tự động tạo bộ sưu tập mẫu để tránh sinh các bộ sưu tập rỗng
     }
 
     private fun cursorToCollection(cursor: Cursor): BookCollection {

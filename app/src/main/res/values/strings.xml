@@ -244,7 +244,7 @@
     <string name="collections_filter_reading">Đang đọc dở (%1$d)</string>
     <string name="collections_filter_completed">Đã xong (%1$d)</string>
     <string name="collections_add_dashed">Thêm bộ sưu tập mới</string>
-    <string name="collections_empty_title">Hãy tạo bộ sưu tập của riêng bạn</string>
+    <string name="collections_empty_title">Hãy tạo bộ sưu tập cho riêng bạn</string>
     <string name="collections_empty_subtitle">Chọn ít nhất 1 cuốn sách để bắt đầu xây dựng bộ sưu tập đầu tiên</string>
     <string name="collections_fab_desc">Tạo bộ sưu tập mới</string>
     <string name="collection_item_sub_format">%1$d cuốn sách • %2$s</string>

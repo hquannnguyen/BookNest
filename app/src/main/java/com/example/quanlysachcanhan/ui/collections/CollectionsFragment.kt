@@ -53,14 +53,9 @@ class CollectionsFragment : Fragment() {
         bookRepository = BookRepository(ctx)
         preferenceManager = PreferenceManager(ctx)
 
-        // Seed sample collections if empty only once on first run
-        if (!preferenceManager.collectionsSampleSeeded) {
-            val allBooks = bookRepository.getAll()
-            if (allBooks.isNotEmpty()) {
-                collectionRepository.seedSampleCollectionsIfEmpty(allBooks)
-                preferenceManager.collectionsSampleSeeded = true
-            }
-        }
+        // Không tự động tạo mẫu bộ sưu tập. Tự động dọn dẹp các bộ sưu tập mẫu rỗng cũ nếu có
+        collectionRepository.cleanUpEmptySampleCollections()
+        preferenceManager.collectionsSampleSeeded = true
 
         setupRecyclerView()
         setupFilterChips()
@@ -147,6 +142,9 @@ class CollectionsFragment : Fragment() {
 
     private fun setupActions() {
         binding.fabCreateCollection.setOnClickListener {
+            openCreateOrEditDialog(0L)
+        }
+        binding.layoutEmptyCollections.setOnClickListener {
             openCreateOrEditDialog(0L)
         }
     }
